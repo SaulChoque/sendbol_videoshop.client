@@ -1,0 +1,33 @@
+<mat-accordion class="example-headers-align" multi
+id="card{{producto?.id}}"
+class="example-card"
+appearance="outlined"
+(mouseenter)="mouseEnter()"
+(mouseleave)="mouseLeave()"
+>
+<mat-expansion-panel [expanded]="isExpanded">
+  <mat-expansion-panel-header>
+    <span class="mat-content">
+
+
+    <mat-panel-title style="background-image: url({{producto?.imagen}});">
+
+    </mat-panel-title>
+
+      <mat-card-title>{{producto?.nombre}}</mat-card-title>
+      <mat-card-subtitle>{{producto?.marca}}</mat-card-subtitle>
+      <p>
+        {{producto?.id}}
+      </p>
+    </span>
+  </mat-expansion-panel-header>
+
+
+    <button mat-button (click)="openDialog(producto)">Comprar</button>
+    <button mat-mini-fab aria-label="Example icon button with a menu icon">
+      <mat-icon>add_shopping_cart</mat-icon>
+    </button>
+
+
+</mat-expansion-panel>
+</mat-accordion>

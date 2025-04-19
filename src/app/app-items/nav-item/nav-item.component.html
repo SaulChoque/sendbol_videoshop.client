@@ -1,0 +1,77 @@
+<!-- CMMT COMPU -->
+@if(currentBreakpoint == breakpoints.XLarge || currentBreakpoint == breakpoints.Large || currentBreakpoint == breakpoints.Medium){
+  <div class="navbar">
+    <mat-toolbar class="inner-navbar" style="justify-content: space-between;">
+
+
+
+
+        <span class="title" id="titlePc">
+          <span class="sendbol" id="titlePc">
+            <h4>sendbol</h4>
+          </span>
+          <span class="video" id="titlePc">
+            <h4>VIDEOSHOP</h4>
+          </span>
+        </span>
+
+
+
+
+      <!--
+
+      <button mat-fab extended class="resaleBtn">
+
+        <mat-icon>favorite</mat-icon>
+
+        <span style="display: flex;">
+          <h5>sendbol</h5>
+          <span style="padding-right: 3%;">   </span>
+          <h4>Re-sale</h4>
+        </span>
+
+      </button>
+
+      -->
+    </mat-toolbar>
+
+  </div>
+
+  }
+
+
+  <!-- CMMT CELULAR -->
+  @else if (currentBreakpoint == breakpoints.XSmall || currentBreakpoint == breakpoints.Small) {
+
+
+  <div class="navbar">
+    <mat-toolbar class="inner-navbar">
+
+
+
+
+        <span class="title" id="titleCel">
+          <span class="sendbol" id="titleCel">
+            <h4>sendbol</h4>
+          </span>
+          <span class="video" id="titleCel">
+            <h4>VIDEO</h4>
+          </span>
+        </span>
+
+
+
+
+      <span class="example-spacer"></span>
+
+      <!--
+
+      <button mat-fab extended>
+        <mat-icon>favorite</mat-icon>
+        Re-sale
+      </button>
+      -->
+
+    </mat-toolbar>
+  </div>
+  }

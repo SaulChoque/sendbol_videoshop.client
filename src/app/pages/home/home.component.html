@@ -1,0 +1,52 @@
+<!--CMMT CRRSL Main carrousel-->
+
+
+<c-carousel>
+  <c-carousel-indicators />
+  <c-carousel-inner>
+    @for (slide of slides; track slide.src) {
+      <c-carousel-item>
+        <img
+          alt="{{slide.title}}"
+          class="d-block w-100"
+          loading="lazy"
+          src="{{slide.src}}"
+        />
+        <c-carousel-caption class="d-none d-md-block">
+          <h3>{{ slide.title }}</h3>
+          <p>{{ slide.subtitle }}</p>
+        </c-carousel-caption>
+      </c-carousel-item>
+    }
+  </c-carousel-inner>
+  <c-carousel-control [routerLink] caption="Previous" direction="prev" />
+  <c-carousel-control [routerLink] caption="Next" direction="next" />
+</c-carousel>
+
+
+<!--CMMT FOR Items -->
+<div
+class="flex-container"
+[class.mat-elevation-z8]="true"
+>
+  <!--CMMT FOR primer for primera linea-->
+  @for (producto of productos.slice(0, 6); track $index) {
+    <app-card-item [producto]="producto"></app-card-item>
+  }
+</div>
+
+<!--CMMT CRRSL Items-->
+<div class="card">
+  <p-carousel
+    [value]="productos"
+    [numVisible]="4"
+    [numScroll]="4"
+    [circular]="true"
+    [responsiveOptions]="responsiveOptions"
+    [orientation]="'horizontal'"
+    [autoplayInterval]="3000">
+    <ng-template let-producto pTemplate="item">
+      <app-card-item [producto]="producto"></app-card-item>
+    </ng-template>
+  </p-carousel>
+</div>

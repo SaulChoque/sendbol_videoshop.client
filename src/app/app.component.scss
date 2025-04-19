@@ -1,0 +1,23 @@
+h4{
+  font-family: 'Typo-hoop';
+  font-size: 2em;
+}
+.app{
+  //background-color: #000000;
+}
+
+
+/* src/app/app.component.css */
+/* src/app/app-items/footer-item/footer-item.component.css */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10; /* Or a higher value */
+}
+
+main {
+  margin-top: 7vh; /* Or the height of your header */
+  /* Add other styling as needed */
+}

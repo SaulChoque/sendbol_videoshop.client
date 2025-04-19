@@ -57,3 +57,24 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+# IMPORTANT INFO
+## Angular JSOn
+
+Add assets route in build/assets
+Add bootstrap route 
+Add AOS route 
+
+```bash
+ng g c folder/component
+
+ng build --configuration production --base-href
+
+npm install aos --save
+
+ng generate @angular/material:theme-color
+
+ng generate @angular/material:m3-theme
+```
+

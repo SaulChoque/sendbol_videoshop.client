@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  @for (svg of svgs; track $index) {
+    <symbol [id]="svg.id" [attr.viewBox]="svg.viewbox">
+      <path [attr.d]="svg.pathD"/>
+    </symbol>
+  }
+</svg>
+
+
+
+  <!--  CMMT LARGE AND MEDIUM PC-->
+  @if(currentBreakpoint == breakpoints.XLarge ||currentBreakpoint == breakpoints.Large || currentBreakpoint == breakpoints.Medium){
+    <div class="footer-item" id="fiPc" style="
+    margin-top: 0px;
+    margin-bottom: 0px;">
+      <mat-grid-list cols="4" rowHeight="2:1">
+        <mat-grid-tile>
+          <h4>sendbol</h4>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-list>
+
+            <mat-list-item>
+              <span matListItemTitle><h5>Servicios</h5></span>
+            </mat-list-item>
+            <mat-list-item><span>sendbol xpress</span></mat-list-item>
+            <mat-list-item><span>sendbol Re-Sale</span></mat-list-item>
+          </mat-list>
+
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-list>
+            <mat-list-item><h5>Acerca de</h5></mat-list-item>
+            <mat-list-item>
+              <a [routerLink]="['legal', 'ToS']" class="navbar-brand" id="br1">
+                <span>Terminos de Servicio</span>
+              </a>
+            </mat-list-item>
+            <mat-list-item>
+              <a [routerLink]="['legal', 'PP']" class="navbar-brand" id="br1">
+                <span>Politica de Privacidad</span>
+              </a>
+            </mat-list-item>
+          </mat-list>
+
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-list>
+            <mat-list-item><h5>Contacto</h5></mat-list-item>
+            <mat-list-item><span>contact&#64;sendbol.com</span></mat-list-item>
+            <mat-list-item><span>+59177242197</span></mat-list-item>
+          </mat-list>
+
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-grid-list cols="4" rowHeight="3:1">
+
+        <mat-grid-tile>
+          <span>&copy; 2024 sendbol </span>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2">
+
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          @for (item of socialmedia; track $index) {
+            <li class="ms-3">
+              <a class="text-body-secondary" [href]="item.url">
+                <button mat-mini-fab
+                [attr.aria-label]="item.name"
+                class="socialMediaButton">
+                  <svg class="bi" width="24" height="24">
+                    <use attr.xlink:href="{{'#'+item.name}}"></use>
+                  </svg>
+                </button>
+              </a>
+            </li>
+          }
+        </mat-grid-tile>
+
+      </mat-grid-list>
+    </div>
+  }
+  <!--  CMMT SMALL AND XSMALL TELEFONOS-->
+  @else if (currentBreakpoint == breakpoints.XSmall || currentBreakpoint == breakpoints.Small) {
+    <!-- src/app/app-items/footer-item/footer-item.component.html -->
+
+      <div class="footer-item" id="fiCel">
+        <br>
+        <br>
+
+        <h4>sendbol</h4>
+
+        <br>
+        <br>
+
+        <mat-list>
+          <mat-list-item><h5>Servicios</h5></mat-list-item>
+          <mat-list-item>
+            <span>sendbol xpress</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span>sendbol Re-Sale</span>
+          </mat-list-item>
+        </mat-list>
+
+        <br>
+        <br>
+
+        <mat-list>
+          <mat-list-item><h5>Acerca de</h5></mat-list-item>
+          <mat-list-item>
+            <a [routerLink]="['legal', 'ToS']" class="navbar-brand" id="br1">
+              <span>Terminos de Servicio</span>
+            </a>
+          </mat-list-item>
+          <mat-list-item>
+            <a [routerLink]="['legal', 'PP']" class="navbar-brand" id="br1">
+              <span>Politica de Privacidad</span>
+            </a>
+          </mat-list-item>
+        </mat-list>
+
+        <br>
+        <br>
+
+        <mat-list>
+          <mat-list-item><h5>Contacto</h5></mat-list-item>
+          <mat-list-item>
+            <span>contact&#64;sendbol.com</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span>+59177242197</span>
+          </mat-list-item>
+        </mat-list>
+
+        <br>
+        <br>
+
+        <div class="socialLinks">
+
+          @for (item of socialmedia; track $index) {
+
+            <a class="text-body-secondary" [href]="item.url">
+              <button
+              mat-mini-fab
+              [attr.aria-label]="item.name"
+              class="socialMediaButton">
+
+
+                <svg class="bi" width="24" height="24">
+                  <use attr.xlink:href="{{'#'+item.name}}"></use>
+                </svg>
+              </button>
+            </a>
+          }
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+      </div>
+
+  }
+
+  <!--
+
+  <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+
+
+  </ul>
+  -->

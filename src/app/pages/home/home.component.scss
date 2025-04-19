@@ -1,0 +1,59 @@
+/*
+.carousel{
+  width: inherit;
+}
+.carousel,.item,.active{
+  height:100%;
+}
+.carousel-inner{
+  height:100%;
+  object-fit: contain;
+}
+*/
+
+.w-100 {
+  height: 100% !important;
+  width: auto;
+}
+.flex-container {
+  display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/*Material Accordeon principal*/
+.mat-accordion {
+  display: grid;
+  margin: 10px;
+  max-width: 248px;
+  min-width: 200px;
+}
+
+
+/*acordeon contenido sin abrir*/
+.mat-expansion-panel-header{
+  display: flex;
+  flex-direction: column;
+  min-height: 290px;
+  height: 100%;
+  width: 100%;
+}
+
+/*contenido del acordeon*/
+.mat-content {
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card{
+  margin: 2%;
+  background-color: transparent;
+  --cui-card-border-color: rgb(255 255 255);
+  color: rgb(255 255 255);
+  //border: var(--cui-card-border-width) solid rgb(255 255 255);
+  border-radius: var(--cui-card-border-radius)
+}

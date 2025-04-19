@@ -1,0 +1,47 @@
+h4{
+  font-family: 'Typo-hoop';
+  font-size: 2em;
+  margin: 15px;
+}
+
+
+#fiCel.footer-item{
+  display: flex;
+  padding: 1rem;
+  //background-color: var(--mat-sidenav-content-background-color, var(--mat-app-background));
+  border-top: 1px solid #e9ecef;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.footer-item {
+
+  padding: 3rem;
+  flex: 1 1 100%;
+  margin: 0.5rem 0;
+  color: #ffffff; /* Cambia el color de la fuente a blanco */
+  //background-color: var(--mat-sidenav-content-background-color, var(--mat-app-background));
+
+}
+
+.footer-item h4, .footer-item h5 , .footer-item span{
+  margin: 0;
+  color: #ffffff; /* Cambia el color de la fuente a blanco */
+}
+
+.footer-item mat-list-item {
+
+  padding: 0;
+
+  color: #ffffff; /* Cambia el color de la fuente a blanco */
+}
+
+.socialLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0;
+  gap: 1rem; /* Agrega espacio entre cada uno de los elementos */
+}

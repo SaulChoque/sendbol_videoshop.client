@@ -1,19 +1,157 @@
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
+@use 'm3-theme.scss' as m3-theme;
 
+
+@use '@coreui/coreui/scss/coreui' as * with (
+  $enable-deprecation-messages: false
+);
+
+// Import Chart.js custom tooltips styles
+//@use '@coreui/chartjs/scss/coreui-chartjs' as *;
+
+@include mat.core();
 html {
-  @include mat.theme((
-    color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
-}/* You can add global styles to this file, and also import other style files */
+  //@include mat.all-component-colors(m3-theme.$light-theme);
+  // Apply the light theme by default
+  //@include mat.core-theme(m3-theme.$light-theme);
+  //@include mat.button-color(m3-theme.$dark-theme);
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Opificio';
+  src: url(assets/fonts/opificio/opificio_regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Opificio';
+  src: url(assets/fonts/opificio/opificio_bold.ttf) format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Typo-hoop';
+  src: url(assets/fonts/typo-hoop/Typo\ Hoop_Regular_Demo.otf) format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cred';
+  src: url(assets/fonts/Street\ Cred.otf) format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+:root{
+  // CMMT EXPLN Cambio de tema claro-oscuro
+  @include mat.all-component-themes(m3-theme.$dark-theme);
+
+}
+
+
+:host {
+  display: flex;
+}
+
+html, body {
+  height: 100%;
+}
+
+
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.gradient {
+  --size: 720px;
+  --speed: 50s;
+  --easing: cubic-bezier(0.8, 0.2, 0.2, 0.8);
+  position: fixed;
+  z-index: -1;
+  width: var(--size);
+  height: var(--size);
+  filter: blur(calc(var(--size) / 5));
+  background-image: linear-gradient(#93000a, #f5e1a7);
+  animation: rotate var(--speed) var(--easing) alternate infinite;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+@media (min-width: 720px) {
+  .gradient {
+    --size: 1080px;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #5d1c22;
+  //background-color: var(--mat-app-background-color);
+  overflow-x: hidden;
+
+
+}
+
+/* This is just to transition when you change the viewport size. */
+* {
+  transition: all 0.5s ease-out;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.abel-regular {
+  font-family: "Abel", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.varela-round-regular {
+  font-family: "Varela Round", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+// <uniquifier>: Use a unique and descriptive class name
+// <weight>: Use a value from 300 to 700
+
+.comfortaa-logo {
+  font-family: "Comfortaa", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 1000 px;
+  font-style: normal;
+}

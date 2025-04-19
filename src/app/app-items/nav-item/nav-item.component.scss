@@ -1,0 +1,71 @@
+
+.mat-toolbar {
+  background-color: transparent !important;
+  //box-shadow: none; /* Opcional: elimina la sombra si está presente */
+}
+
+.title{
+  display: flex;
+  flex-direction: row;text-decoration: none;
+  text-align: center;
+}
+
+.title h4{
+
+  text-decoration: none; /* Elimina el subrayado */
+  color: white;
+  //color: var(--primary-color-text, var(--mat-text-color));
+}
+
+.sendbol h4{
+  font-family: 'Typo-hoop';
+}
+.video h4{
+  font-family: 'Cred';
+}
+
+#br1.navbar-brand a{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  //background-color: var(--mat-sidenav-content-background-color, var(--mat-app-background))
+}
+
+.resaleBtn h4{
+  font-family: 'Varela Round';
+  font-size: 2em;
+}
+.resaleBtn h5{
+  font-family: 'Typo-hoop';
+}
+
+#titlePc.video h4{
+  font-size: 3em;
+}
+#titlePc.sendbol h4{
+  font-size: 2em;
+}
+
+
+#titleCel.video h4{
+  font-size: 2.5em;
+}
+#titleCel.sendbol h4{
+  font-size: 1.5em;
+}
+
+.navbar{
+  padding: 2.5%;
+  //background-color: var(--mat-toolbar-container-background-color, var(--mat-app-surface));
+  background-color: #5d1c22;
+  box-shadow: 7px 7px 7px 7px rgba(0, 0, 0, 0.235) !important;
+  //background-color: #000000;
+  //opacity: 50%;
+  //backdrop-filter: 100%;
+}
+
+.inner-navbar{
+  gap: 1rem;
+}
