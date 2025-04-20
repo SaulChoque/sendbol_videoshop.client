@@ -1,77 +1,102 @@
 <!-- CMMT COMPU -->
-@if(currentBreakpoint == breakpoints.XLarge || currentBreakpoint == breakpoints.Large || currentBreakpoint == breakpoints.Medium){
-  <div class="navbar">
-    <mat-toolbar class="inner-navbar" style="justify-content: space-between;">
+@if(currentBreakpoint == breakpoints.XLarge || currentBreakpoint ==
+breakpoints.Large || currentBreakpoint == breakpoints.Medium){
+<div class="navbar">
+  <mat-toolbar class="inner-navbar" style="justify-content: space-between">
 
 
-
-
-        <span class="title" id="titlePc">
-          <span class="sendbol" id="titlePc">
-            <h4>sendbol</h4>
-          </span>
-          <span class="video" id="titlePc">
-            <h4>VIDEOSHOP</h4>
-          </span>
+    <div class="logobrand">
+      <span class="title" id="titlePc">
+        <span class="sendbol" id="titlePc">
+          <h4>sendbol</h4>
         </span>
-
-
-
-
-      <!--
-
-      <button mat-fab extended class="resaleBtn">
-
-        <mat-icon>favorite</mat-icon>
-
-        <span style="display: flex;">
-          <h5>sendbol</h5>
-          <span style="padding-right: 3%;">   </span>
-          <h4>Re-sale</h4>
+        <span class="video" id="titlePc">
+          <h4>VIDEOSHOP</h4>
         </span>
+      </span>
+    </div>
+    <!--
 
+    <mat-form-field>
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hide() ? 'password' : 'text'" />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="clickEvent($event)"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide()"
+      >
+        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
+    </mat-form-field>
+    -->
+    <div class="searchbar">
+      <mat-form-field appearance="outline" style="width:30vw">
+        <input matInput placeholder="Buscar" />
+        <button mat-icon-button matSuffix>
+          <mat-icon matSuffix>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <!--
+    <p-inputgroup>
+      <input pInputText placeholder="Keyword" />
+      <p-inputgroup-addon>
+        <button mat-fab aria-label="Account">
 
-      -->
-    </mat-toolbar>
+          <mat-icon>search</mat-icon>
 
-  </div>
-
-  }
-
-
-  <!-- CMMT CELULAR -->
-  @else if (currentBreakpoint == breakpoints.XSmall || currentBreakpoint == breakpoints.Small) {
-
-
-  <div class="navbar">
-    <mat-toolbar class="inner-navbar">
-
-
-
-
-        <span class="title" id="titleCel">
-          <span class="sendbol" id="titleCel">
-            <h4>sendbol</h4>
-          </span>
-          <span class="video" id="titleCel">
-            <h4>VIDEO</h4>
-          </span>
-        </span>
+        </button>
+      </p-inputgroup-addon>
+    </p-inputgroup>
 
 
+   -->
+    <div class="buttons">
+      <span class="buttonSpacer">
+        <button mat-fab aria-label="Account">
+          <mat-icon>person</mat-icon>
+        </button>
+      </span>
+
+      <span class="buttonSpacer">
+        <button mat-fab aria-label="Shopping cart">
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
+      </span>
+    </div>
 
 
-      <span class="example-spacer"></span>
+  </mat-toolbar>
+</div>
 
-      <!--
+}
+
+<!-- CMMT CELULAR -->
+@else if (currentBreakpoint == breakpoints.XSmall || currentBreakpoint ==
+breakpoints.Small) {
+
+<div class="navbar">
+  <mat-toolbar class="inner-navbar">
+    <span class="title" id="titleCel">
+      <span class="sendbol" id="titleCel">
+        <h4>sendbol</h4>
+      </span>
+      <span class="video" id="titleCel">
+        <h4>VIDEO</h4>
+      </span>
+    </span>
+
+    <span class="example-spacer"></span>
+
+    <!--
 
       <button mat-fab extended>
         <mat-icon>favorite</mat-icon>
         Re-sale
       </button>
       -->
-
-    </mat-toolbar>
-  </div>
-  }
+  </mat-toolbar>
+</div>
+}

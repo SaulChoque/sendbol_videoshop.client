@@ -8,10 +8,32 @@ import { RouterModule } from '@angular/router';
 import { MediaQueryService } from '../../services/media-query.service';
 import { Breakpoints } from '@angular/cdk/layout';
 
+
+import { InputGroup } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { MenuModule } from 'primeng/menu';
+
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+
 @Component({
   selector: 'app-nav-item',
-  imports: [MatButtonModule, MatIconModule, MatMenuModule,
-    MatToolbarModule, RouterModule],
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
+    RouterModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    ButtonModule,
+    InputGroupAddonModule,
+    InputTextModule,
+    MenuModule
+  ],
   templateUrl: './nav-item.component.html',
   styleUrl: './nav-item.component.scss'
 })

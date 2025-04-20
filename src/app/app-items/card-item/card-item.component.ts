@@ -56,7 +56,14 @@ export class CardItemComponent {
 
 
   openDialog(productox?: Producto): void {
-    this.dialog.open(DialogItemComponent, {data: productox});
+    this.dialog.open(DialogItemComponent, {
+
+      height: 'fit-content',
+      minWidth: 'fit-content',
+
+      data: productox
+
+    });
 
     console.log('Open dialog!');
   }

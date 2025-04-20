@@ -1,3 +1,9 @@
+@use '@angular/material' as mat;
+
+
+
+
+
 
 .mat-toolbar {
   background-color: transparent !important;
@@ -13,7 +19,7 @@
 .title h4{
 
   text-decoration: none; /* Elimina el subrayado */
-  color: white;
+  color: var(--mat-fab-small-foreground-color); /* Cambia el color del texto a blanco */
   //color: var(--primary-color-text, var(--mat-text-color));
 }
 
@@ -33,19 +39,12 @@
   //background-color: var(--mat-sidenav-content-background-color, var(--mat-app-background))
 }
 
-.resaleBtn h4{
-  font-family: 'Varela Round';
-  font-size: 2em;
-}
-.resaleBtn h5{
-  font-family: 'Typo-hoop';
-}
 
 #titlePc.video h4{
-  font-size: 3em;
+  font-size: 2.5em;
 }
 #titlePc.sendbol h4{
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 
@@ -56,16 +55,48 @@
   font-size: 1.5em;
 }
 
-.navbar{
-  padding: 2.5%;
-  //background-color: var(--mat-toolbar-container-background-color, var(--mat-app-surface));
+.navbar {
+  border: 2px solid var(--mat-fab-small-foreground-color); /* Cambia el color del borde a blanco */
+  border-radius: 15px; /* Bordes redondeados */
+  margin: 1%;
+  padding: 1%;
   background-color: #5d1c22;
   box-shadow: 7px 7px 7px 7px rgba(0, 0, 0, 0.235) !important;
-  //background-color: #000000;
-  //opacity: 50%;
-  //backdrop-filter: 100%;
 }
 
 .inner-navbar{
   gap: 1rem;
+}
+
+.p-inputtext {
+  background: #5d1c22;
+  border: 2px solid white;
+}
+
+.p-inputgroupaddon {
+  background: transparent;
+  color: #ffffff;
+  border-block-start: 1px solid white;
+  border-block-end: 1px solid white;
+  min-width: var(--p-inputgroup-addon-min-width);
+}
+
+.p-inputgroupaddon:last-child {
+  border-inline-end: 1px solid white;
+}
+
+.searchbar{
+  @include mat.form-field-overrides((
+    outlined-outline-width: 3px,
+    //outlined-container-shape: 20px,
+    //outlined-focus-outline-width : px,
+    //container-vertical-padding: 10px,
+    container-height: 50px,
+));
+  display: flex;
+}
+
+.buttonSpacer{
+  margin: 0.5rem;
+  padding: 0.5rem;
 }
