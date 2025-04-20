@@ -9,7 +9,6 @@ import { MediaQueryService } from '../../services/media-query.service';
 import { Breakpoints } from '@angular/cdk/layout';
 
 
-import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';

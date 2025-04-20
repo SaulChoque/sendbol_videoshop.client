@@ -1,14 +1,9 @@
-import {ChangeDetectionStrategy, Component, Input, viewChild} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatAccordion, MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
-import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogTitle,
-  MatDialogContent,
-} from '@angular/material/dialog';
+import {MatDialog,} from '@angular/material/dialog';
 
 //import {DialogItemComponent} from '../dialog-item/dialog-item.component';
 import {Producto} from './../../models/Producto';

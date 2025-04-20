@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-import {MatAccordion, MatExpansionModule} from '@angular/material/expansion';
+import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import {Producto} from '../../models/Producto';
 import { PRODUCTOS } from '../../models/constants';
 
 import { CardItemComponent } from '../../app-items/card-item/card-item.component';

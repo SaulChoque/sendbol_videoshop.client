@@ -1,6 +1,5 @@
-import { Component, Inject, model } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
-  MatDialog,
   MAT_DIALOG_DATA,
   MatDialogTitle,
   MatDialogContent,
@@ -10,8 +9,6 @@ import { GalleriaModule } from 'primeng/galleria';
 import { RatingModule } from 'primeng/rating';
 
 import { Producto } from './../../models/Producto';
-import { PRODUCTOS } from './../../models/constants';
-
 import { IMAGESS } from '../../services/photoservice';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
