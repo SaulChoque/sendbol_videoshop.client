@@ -6,7 +6,51 @@
   display: flex;
 
 }
+.infoPanel{
+  padding: 1%;
+  width: 15vh;
+  display: flex;
+  flex-direction: column; /* O row, dependiendo de cómo quieras organizar los elementos */
+  gap: 1rem;
+}
+
+.ratingPanel{
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
 
 .purchasePanel{
+  padding: 1%;
   width: 20vh;
+  display: flex;
+  flex-direction: column; /* O row, dependiendo de cómo quieras organizar los elementos */
+  gap: 1rem;
+}
+
+.purButtons{
+  display: flex;
+  flex-direction: column; /* O row, dependiendo de cómo quieras organizar los elementos */
+  gap: 1rem;
+}
+.counterButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 12vh;
+}
+
+.photoPanel{
+  display: flex;
+  flex-direction: column; /* O row, dependiendo de cómo quieras organizar los elementos */
+  gap: 1rem;
+  //align-items: center;
+}
+
+.titleTex h1 {
+  font-size: 3em;
+  line-height: 1; /* Ajusta el valor para definir el espacio entre líneas */
 }

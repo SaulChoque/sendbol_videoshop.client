@@ -5,32 +5,71 @@
 
 
     <div class="photoPanel">
-      <p-galleria [value]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }"
-        [numVisible]="5">
-        <ng-template #item let-item>
-          <img [src]="item.itemImageSrc" style="width:100%" />
-        </ng-template>
-        <ng-template #thumbnail let-item>
-          <img [src]="item.thumbnailImageSrc" />
-        </ng-template>
-      </p-galleria>
+      <span>
+
+        <p-galleria [value]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '450px' }"
+          [numVisible]="5">
+          <ng-template #item let-item>
+            <img [src]="item.itemImageSrc" style="width:100%" />
+          </ng-template>
+          <ng-template #thumbnail let-item>
+            <img [src]="item.thumbnailImageSrc" />
+          </ng-template>
+        </p-galleria>
+      </span>
+
+      <span>
+        <h4>Etiquetas</h4>
+      </span>
+
+      <span>
+        <mat-chip-set aria-label="Fish selection">
+          <mat-chip>One fish</mat-chip>
+          <mat-chip>Two fish</mat-chip>
+          <mat-chip>Three fish</mat-chip>
+          <mat-chip disabled>Four fish</mat-chip>
+        </mat-chip-set>
+      </span>
+
     </div>
 
 
 
 
     <div class="infoPanel">
-      <h2 mat-dialog-title>{{data.nombre}} </h2>
-      <h2 mat-dialog-title>{{data.precio}} </h2>
+      <span class="titleTex">
+        <h1 mat-dialog-title>{{data.nombre}} </h1>
+        <h2 mat-dialog-title>{{data.precio}} </h2>
+      </span>
 
+
+      <span class="ratingPanel">
+        <span>
+          <button mat-icon-button aria-label="me gusta">
+            <mat-icon>thumb_up</mat-icon>
+          </button>
+          <button mat-icon-button aria-label="no me gusta">
+            <mat-icon>thumb_down</mat-icon>
+          </button>
+        </span>
+
+        <span>
+          <p-rating />
+        </span>
+      </span>
     </div>
 
 
 
     <div class=" purchasePanel">
       {{data.descripcion}}
-
+      <span class="counterButtons">
+        <button mat-stroked-button>-</button>
+        <h4>1</h4>
+        <button mat-stroked-button>+</button>
+      </span>
       <div class="purButtons">
+
         <button mat-flat-button>
           Lo quiero!
           <mat-icon>shopping_cart_checkout</mat-icon>
