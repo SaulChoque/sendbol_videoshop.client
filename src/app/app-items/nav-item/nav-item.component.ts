@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {MatMenuModule} from '@angular/material/menu';
+import {MatMenuModule, MatMenuTrigger} from '@angular/material/menu';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 //CMMT: Importacion de servicios
@@ -41,6 +41,19 @@ export class NavItemComponent {
   constructor(
     private mediaQueryService: MediaQueryService,
   ) {}
+
+ @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
+
+
+  someMethod( bool: boolean ) {
+    if (this.trigger) {
+      if (bool) {
+        this.trigger.openMenu();
+      } else {
+        this.trigger.closeMenu();
+      }
+    }
+  }
 
   @Input()
   breakpoints = Breakpoints;

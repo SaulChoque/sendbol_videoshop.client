@@ -55,9 +55,20 @@ breakpoints.Large || currentBreakpoint == breakpoints.Medium){
    -->
     <div class="buttons">
       <span class="buttonSpacer">
-        <button mat-fab aria-label="Account">
+        <button
+        mat-fab aria-label="Account"
+        [matMenuTriggerFor]="menu"
+        (mouseenter)="someMethod(true)"
+
+        >
           <mat-icon>person</mat-icon>
         </button>
+        <mat-menu #menu="matMenu">
+
+          <button mat-menu-item>Acceder
+          </button>
+
+        </mat-menu>
       </span>
 
       <span class="buttonSpacer">
