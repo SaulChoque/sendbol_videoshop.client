@@ -1,4 +1,4 @@
-import { Component, Inject, model } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -10,12 +10,13 @@ import { GalleriaModule } from 'primeng/galleria';
 import { RatingModule } from 'primeng/rating';
 
 import { Producto } from './../../models/Producto';
-import { PRODUCTOS } from './../../models/constants';
 
 import { IMAGESS } from '../../services/photoservice';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import {MatChipsModule} from '@angular/material/chips';
+
+
 @Component({
   selector: 'app-dialog-item',
   imports: [
@@ -25,7 +26,7 @@ import {MatChipsModule} from '@angular/material/chips';
     MatButtonModule,
     MatIcon,
     RatingModule,
-    MatChipsModule
+    MatChipsModule,
   ],
   templateUrl: './dialog-item.component.html',
   styleUrl: './dialog-item.component.scss'
@@ -33,6 +34,8 @@ import {MatChipsModule} from '@angular/material/chips';
 export class DialogItemComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: Producto) {
   }
+
+
 
   value!: number;
   images = IMAGESS;

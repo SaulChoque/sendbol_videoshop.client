@@ -3,6 +3,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatAccordion, MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -46,12 +47,12 @@ export class CardItemComponent {
 
   mouseEnter(): void {
     this.isExpanded = true;
-    console.log('Mouse enter!');
+    //console.log('Mouse enter!');
   }
 
   mouseLeave(): void {
     this.isExpanded = false;
-    console.log('Mouse leave!');
+    //console.log('Mouse leave!');
   }
 
 
@@ -61,10 +62,11 @@ export class CardItemComponent {
       height: 'fit-content',
       minWidth: 'fit-content',
 
-      data: productox
+      data: productox,
+      scrollStrategy: new NoopScrollStrategy()
 
     });
 
-    console.log('Open dialog!');
+    //console.log('Open dialog!');
   }
 }

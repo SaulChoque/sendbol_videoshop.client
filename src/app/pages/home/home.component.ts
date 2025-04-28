@@ -1,12 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatAccordion, MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import {Producto} from '../../models/Producto';
 import { PRODUCTOS } from '../../models/constants';
-
 import { CardItemComponent } from '../../app-items/card-item/card-item.component';
 
 
@@ -14,6 +12,7 @@ import { CardItemComponent } from '../../app-items/card-item/card-item.component
 import { CarouselModule } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
+
 
 import {
   CarouselCaptionComponent,
@@ -47,6 +46,7 @@ import {
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
+
 
   slides: any[] = new Array(3).fill({ id: -1, src: '', title: '', subtitle: '' });
 

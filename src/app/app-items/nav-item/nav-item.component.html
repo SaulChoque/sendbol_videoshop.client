@@ -65,7 +65,11 @@ breakpoints.Large || currentBreakpoint == breakpoints.Medium){
         </button>
         <mat-menu #menu="matMenu">
 
-          <button mat-menu-item>Acceder
+          <button
+          mat-menu-item
+          (click)="openDialog()"
+          >
+            Acceder
           </button>
 
         </mat-menu>
