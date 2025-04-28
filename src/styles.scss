@@ -5,7 +5,7 @@
 @use '@coreui/coreui/scss/coreui' as * with (
   $enable-deprecation-messages: false
 );
-
+//@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
 // Import Chart.js custom tooltips styles
 //@use '@coreui/chartjs/scss/coreui-chartjs' as *;
 
@@ -100,6 +100,7 @@ body {
   background-color: #5d1c22;
   //background-color: var(--mat-app-background-color);
   overflow-x: hidden;
+  overflow-y: unset;
 
 
 }
@@ -109,7 +110,9 @@ body {
   transition: all 0.5s ease-out;
 }
 
-
+.cdk-global-scrollblock{
+  overflow-y: unset;
+}
 
 
 

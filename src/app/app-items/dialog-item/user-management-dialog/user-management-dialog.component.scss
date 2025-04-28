@@ -1,0 +1,70 @@
+@use '@angular/material' as mat;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+.mat-dia-container{
+  @include mat.dialog-overrides((
+    content-padding: 0,
+  ));
+}
+
+.dialogContentContainer {
+  display: flex; /* Cambia a flexbox */
+  flex-direction: row; /* Asegura que los elementos estén en fila horizontal */
+  justify-content: space-between; /* Espaciado entre los elementos */
+  align-items: stretch; /* Asegura que los hijos llenen la altura del contenedor */
+  //width: 100%; /* Asegúrate de que el contenedor ocupe todo el ancho disponible */
+  height: 100%; /* Asegúrate de que tenga una altura definida */
+  //row-gap: 5rem; /* Espacio entre los elementos */
+}
+
+.infoPanel {
+  height: 39vh;
+  flex: 0 0 60%; /* Ocupa el 60% del ancho */
+  padding: 5%;
+}
+
+.photoPanel {
+  flex: 0 0 40%; /* Ocupa el 40% del ancho */
+  //height: 100%; /* Llena la altura del contenedor padre */
+  background-image: url('./../../../../assets/images/login/i2.png');
+  background-size: cover; /* Asegura que la imagen cubra todo el div */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-position: center; /* Centra la imagen dentro del div */
+}
+
+.logButtons{
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column; /* O row, dependiendo de cómo quieras organizar los elementos */
+  gap: 1rem;
+}
+
+
+.titleTex h3{
+  font-size: 1.2em;
+}
+.titleTex h4{
+  font-size: 0.8em;
+}
+h2#sendbolTxt{
+  font-size: 1.8em;
+  font-family: 'Typo-hoop';
+}
+
+h2#videoTxt{
+  font-size: 2.5em;
+  font-family: 'Cred';
+}
+
+.title{
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  text-align: center;
+  align-items: center;
+}
+
+a{
+  color: var(--mdc-outlined-button-label-text-color);
+}

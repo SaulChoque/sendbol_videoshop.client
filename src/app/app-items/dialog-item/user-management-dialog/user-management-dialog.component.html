@@ -1,0 +1,38 @@
+<div class="mat-dia-container">
+
+
+<mat-dialog-content>
+
+
+
+  <div class="dialogContentContainer">
+      <div class="infoPanel">
+        @switch (condition){
+          @case (1) {
+            <app-email-check-items (emailNextButtonCLick)="changePage($event, 2)">
+            </app-email-check-items>
+          }
+          @case (2) {
+            <app-register-items></app-register-items>
+
+          }
+          @case (3) {
+
+          }
+          @default {
+            <app-login-items (emailButtonCLick)="changePage($event, 1)">
+            </app-login-items>
+          }
+        }
+
+      </div>
+
+
+    <div class="photoPanel">
+
+
+    </div>
+
+  </div>
+</mat-dialog-content>
+</div>

@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, inject} from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {MatMenuModule} from '@angular/material/menu';
+import {MatMenuModule, MatMenuTrigger} from '@angular/material/menu';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 //CMMT: Importacion de servicios
@@ -16,6 +16,9 @@ import { MenuModule } from 'primeng/menu';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatDialog} from '@angular/material/dialog';
+import { UserManagementDialogComponent } from '../dialog-item/user-management-dialog/user-management-dialog.component';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-nav-item',
@@ -40,6 +43,33 @@ export class NavItemComponent {
   constructor(
     private mediaQueryService: MediaQueryService,
   ) {}
+
+  readonly dialog = inject(MatDialog);
+
+  openDialog() {
+    this.dialog.open(
+      UserManagementDialogComponent,
+      {
+
+        minHeight: 'fit-content',
+        //minHeight: '40vh',
+        minWidth: '40vw',
+        scrollStrategy: new NoopScrollStrategy()
+      }
+    );
+  }
+ @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
+
+
+  someMethod( bool: boolean ) {
+    if (this.trigger) {
+      if (bool) {
+        this.trigger.openMenu();
+      } else {
+        this.trigger.closeMenu();
+      }
+    }
+  }
 
   @Input()
   breakpoints = Breakpoints;

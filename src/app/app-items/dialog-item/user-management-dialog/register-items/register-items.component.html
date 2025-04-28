@@ -1,0 +1,79 @@
+<span class="titleTex">
+
+
+  <h2>
+    Crea tu Cuenta
+  </h2>
+
+  <!--
+    <span class="title">
+      <h2 id="sendbolTxt">
+        sendbol
+      </h2>
+    <h2 id="videoTxt">
+      VIDEOSHOP
+    </h2>
+  </span>
+  -->
+
+  <h3>
+    Estas creando una cuenta de videoshop con ejemplogmail.com
+  </h3>
+
+</span>
+
+<span class="logButtons">
+  <span class="formNames">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nombres</mat-label>
+      <input matInput placeholder="Kevin">
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Apellidos</mat-label>
+      <input matInput placeholder="McAllister">
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+  </span>
+  <span class="formNames">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Pais</mat-label>
+    <mat-select>
+      @for (country of Countrys; track country) {
+        <mat-option [value]="country.value">{{country.viewValue}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Fecha de Nacimiento</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-hint>DD/MM/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</span>
+
+  <button mat-flat-button>
+    Continuar
+  </button>
+
+</span>
+
+<span class="titleTex">
+  <h4>
+    Al continuar, aceptas los
+    <a href="https://www.sendbol.com/terms-and-conditions" target="_blank">
+      Términos y condiciones de uso
+    </a>
+    . Consulta nuestra
+    <a href="https://www.sendbol.com/privacy-policy" target="_blank">
+      Política de privacidad.
+    </a>
+
+  </h4>
+</span>
+
