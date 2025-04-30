@@ -23,19 +23,55 @@
 </span>
 
 <span class="logButtons">
+  <form [formGroup]="emailFormGroup" class="formNames" (ngSubmit)="onSubmit()">
 
-  <mat-form-field appearance="outline">
-    <mat-label>Correo (personal o profesional)</mat-label>
-    <input matInput placeholder="ejemplo@correo.com">
-    <mat-icon matSuffix>mail</mat-icon>
-  </mat-form-field>
+    <!--CMMT Componente Formulario Correo-->
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Correo (personal o profesional)</mat-label>
 
-  <button
-  mat-flat-button
-  (click)="clickNextButton()"
-  >
-    Continuar
-  </button>
+        <input
+          matInput
+          placeholder=""
+          formControlName="correo"
+          (input)="updateErrorMessage('correo')"
+          (blur)="updateErrorMessage('correo')"
+          required
+        >
+        @if (emailFormGroup.get('correo')?.invalid) {
+          <mat-error>{{errorMessageCorreo()}}</mat-error>
+        }
+        <mat-icon matSuffix>mail</mat-icon>
+      </mat-form-field>
+    </p>
+
+    @if (clickNextButtonValue) {
+    <!--CMMT Componente Formulario Contraseña-->
+    <p>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{passwordField}}</mat-label>
+
+        <input matInput [type]="hide() ? 'password' : 'text'" formControlName="contrasena" />
+        <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Esconder contraseña'"
+          [attr.aria-pressed]="hide()">
+          <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </p>
+    }
+
+    <p>
+      <button
+      mat-flat-button
+      (click)="clickNextButton()"
+      >
+        Continuar
+      </button>
+    </p>
+  </form>
+
+
 
 </span>
 
