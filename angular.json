@@ -3,12 +3,22 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "sendbol_streaming": {
+    "sendbol_videoshop.client": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
+          "standalone": false,
+
+
           "style": "scss"
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
         }
+
       },
       "root": "",
       "sourceRoot": "src",
@@ -24,21 +34,35 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
+
+
+
             "inlineStyleLanguage": "scss",
+
+
+
             "assets": [
               {
                 "glob": "**/*",
                 "input": "public"
               },
+
               "src/assets"
+
             ],
+
+
             "styles": [
               "src/styles.scss",
               "src/m3-theme.scss",
               "node_modules/aos/dist/aos.css"
+
+
             ],
             "scripts": [
               "node_modules/aos/dist/aos.js"
+
+
             ]
           },
           "configurations": {
@@ -69,13 +93,17 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "sendbol_streaming:build:production"
+              "buildTarget": "sendbol_videoshop.client:build:production"
             },
             "development": {
-              "buildTarget": "sendbol_streaming:build:development"
+              "buildTarget": "sendbol_videoshop.client:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "proxyConfig": "src/proxy.conf.js",
+            "port": 54993
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"
@@ -88,7 +116,6 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
@@ -98,7 +125,8 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "karmaConfig": "karma.conf.js"
           }
         }
       }
