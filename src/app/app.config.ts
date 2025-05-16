@@ -13,6 +13,7 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import MyPreset from '../styles/primeng.preset';
 import { routes } from './app.routes';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers:
@@ -27,6 +28,8 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(DropdownModule),
     provideAnimationsAsync(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes)
+    provideRouter(routes),
+    provideHttpClient()
+
   ]
 };

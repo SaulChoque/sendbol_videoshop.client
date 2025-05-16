@@ -1,14 +1,18 @@
-import { Component, model } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   MatDialogContent,
 } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { LoginItemsComponent } from './login-items/login-items.component';
 import { EmailCheckItemsComponent } from './email-check-items/email-check-items.component';
 import { RegisterItemsComponent } from './register-items/register-items.component';
+import { Usuario } from '../../../models/Usuario';
+import { FinishReloadItemComponent } from '../../snackbar-item/finish-reload-item/finish-reload-item.component';
+import { left, start } from '@popperjs/core';
+import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'app-user-management-dialog',
   imports: [
@@ -16,22 +20,43 @@ import { RegisterItemsComponent } from './register-items/register-items.componen
     MatButtonModule,
     LoginItemsComponent,
     EmailCheckItemsComponent,
-    RegisterItemsComponent
+    RegisterItemsComponent,
+
   ],
   templateUrl: './user-management-dialog.component.html',
   styleUrl: './user-management-dialog.component.scss'
 })
 export class UserManagementDialogComponent {
+  readonly dialog = inject(MatDialog);
+  private _snackBar = inject(MatSnackBar);
+  usuario?: Usuario;
+
   constructor() {
   }
   condition =  -1;
 
-  changePage(value: boolean, index: number) {
+  changePage(index: number) {
     //console.log('apretado PADRECOMPONENT');
-    if(value){
-      this.condition = index;
-      //console.log('INDEX', index);
-    }
+    this.condition = index;
+
+  }
+
+
+  recieveData(value: Usuario, index: number) {
+    this.usuario = value;
+    this.changePage(index);
+  }
+
+  sendButtonFinalClick(value: boolean) {
+    this._snackBar.openFromComponent(
+      FinishReloadItemComponent,
+      {
+        duration: 200000,
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+      }
+    );
+    this.dialog.closeAll();
 
   }
 }

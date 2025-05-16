@@ -2,7 +2,7 @@
 
 
   <h2>
-    Usar un correo electronico
+    {{dialogTitle}}
   </h2>
 
   <!--
@@ -17,7 +17,7 @@
   -->
 
   <h3>
-    Comprobaremos si tienes una cuenta y, si no, te ayudaremos a crear una.
+    {{dialogSubtitle}}
   </h3>
 
 </span>
@@ -34,7 +34,7 @@
           matInput
           placeholder=""
           formControlName="correo"
-          (input)="updateErrorMessage('correo')"
+          (input)="this.clickNextButtonValue = false; "
           (blur)="updateErrorMessage('correo')"
           required
         >
@@ -45,14 +45,22 @@
       </mat-form-field>
     </p>
 
-    @if (clickNextButtonValue) {
+    @if (clickNextButtonValue ) {
     <!--CMMT Componente Formulario Contraseña-->
     <p>
 
       <mat-form-field appearance="outline">
         <mat-label>{{passwordField}}</mat-label>
 
-        <input matInput [type]="hide() ? 'password' : 'text'" formControlName="contrasena" />
+        <input
+        matInput [type]="hide() ? 'password' : 'text'"
+        [formControlName]="inputFormNameCont"
+        (blur)="updateErrorMessage(inputFormNameCont)"
+
+        />
+        @if (emailFormGroup.get(inputFormNameCont)?.invalid) {
+          <mat-error>{{errorMessageContrasena()}}</mat-error>
+        }
         <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Esconder contraseña'"
           [attr.aria-pressed]="hide()">
           <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
