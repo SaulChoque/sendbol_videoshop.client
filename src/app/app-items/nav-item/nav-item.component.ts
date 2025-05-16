@@ -9,7 +9,6 @@ import { MediaQueryService } from '../../services/media-query.service';
 import { Breakpoints } from '@angular/cdk/layout';
 
 
-import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -20,6 +19,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDialog} from '@angular/material/dialog';
 import { UserManagementDialogComponent } from '../dialog-item/user-management-dialog/user-management-dialog.component';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { AuthService } from '../../services/auth.service';
+import { Usuario } from '../../models/Usuario';
+
+
 
 @Component({
   selector: 'app-nav-item',
@@ -41,9 +44,42 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
   styleUrl: './nav-item.component.scss'
 })
 export class NavItemComponent {
+
+  usuarioEnSesion?: Usuario;
+  usuarioExists: boolean = false;
+
   constructor(
     private mediaQueryService: MediaQueryService,
+    private authService: AuthService,
   ) {}
+
+  ngOnInit() {
+
+    this.mediaQueryService.breakpoint$.subscribe(() => {
+      this.mediaQueryService.triggerProcesses();
+      this.currentBreakpoint = this.mediaQueryService.returnBreakpoint();
+    });
+
+
+    this.currentWidth = this.mediaQueryService.returnWidth();
+
+        this.authService.getSessionUser().subscribe({
+      next: (usuario: any) => {
+        this.usuarioEnSesion = usuario;
+        this.usuarioExists = true;
+        console.log('Sesión activa:', usuario);
+      },
+      error: (err) => {
+        this.usuarioEnSesion = undefined;
+        this.usuarioExists = false;
+        console.log('No hay sesión activa');
+      }
+    });
+
+
+    //console.log(this.constantes.IMGBAN001);
+  }
+
 
   readonly dialog = inject(MatDialog);
 
@@ -78,17 +114,5 @@ export class NavItemComponent {
   currentWidth?: string;
 
 
-  ngOnInit() {
 
-    this.mediaQueryService.breakpoint$.subscribe(() => {
-      this.mediaQueryService.triggerProcesses();
-      this.currentBreakpoint = this.mediaQueryService.returnBreakpoint();
-    });
-
-
-    this.currentWidth = this.mediaQueryService.returnWidth();
-
-
-    //console.log(this.constantes.IMGBAN001);
-  }
 }

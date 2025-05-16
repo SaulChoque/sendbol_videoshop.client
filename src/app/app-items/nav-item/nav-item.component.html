@@ -64,13 +64,22 @@ breakpoints.Large || currentBreakpoint == breakpoints.Medium){
           <mat-icon>person</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
+          @if (usuarioExists) {
+            <button
+            mat-menu-item
+            >
 
-          <button
-          mat-menu-item
-          (click)="openDialog()"
-          >
+              {{usuarioEnSesion?.nombre}}
+            </button>
+
+          }@else {
+            <button
+            mat-menu-item
+            (click)="openDialog()"
+            >
             Acceder
-          </button>
+            </button>
+          }
 
         </mat-menu>
       </span>

@@ -12,7 +12,6 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { AuthService } from '../../../../services/auth.service';
 
 import { CountryService, Country } from '../../../../services/country.service';
-import { MatDialogClose } from '@angular/material/dialog';
 @Component({
   selector: 'app-register-items',
   imports: [
@@ -24,7 +23,7 @@ import { MatDialogClose } from '@angular/material/dialog';
     MatSelectModule,
     MatDatepickerModule,
     ReactiveFormsModule,
-  
+
   ],
   providers: [provideNativeDateAdapter(), { provide: MAT_DATE_LOCALE, useValue: 'es-US' },],
   templateUrl: './register-items.component.html',
@@ -51,7 +50,10 @@ export class RegisterItemsComponent {
   //CMMT EXPLN Se usa el FormBuilder para crear el formulario reactivo
   //CMMT TO-DO Aplicar AQUI la logica de mediaQuery Service
   //CMMT TO-DO Aplicar AQUI la logica de authService para subir el usuario a la base de datos
-  constructor(private fb: FormBuilder, private authService: AuthService, private countryService: CountryService) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private countryService: CountryService) {
     this.registerFormGroup = this.fb.group({
       nombres: [
         '',

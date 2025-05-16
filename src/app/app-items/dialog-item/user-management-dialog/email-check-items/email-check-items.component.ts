@@ -1,11 +1,13 @@
 // Componentes
-import { Component, Output, EventEmitter, signal } from '@angular/core';
+import { Component, Output, EventEmitter, signal, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
 
 // Servicios
 import { AuthService } from '../../../../services/auth.service';
@@ -32,12 +34,15 @@ import { Usuario } from '../../../../models/Usuario';
   styleUrl: './email-check-items.component.scss'
 })
 export class EmailCheckItemsComponent {
+  private _snackBar = inject(MatSnackBar);
+  readonly dialog = inject(MatDialog);
 
 
 
   // Banderas (boolean)
   beginRegisterProcess: boolean = false;
   existsEmail: boolean = false;
+  loginStatus: boolean = false;
   clickNextButtonValue: boolean = false;
   inputBoolValue: boolean = false;
 
@@ -158,6 +163,52 @@ export class EmailCheckItemsComponent {
     });
   }
 
+  loginUser(usuario: Usuario): Promise<boolean>{
+    return new Promise((resolve, reject) => {
+      this.authService.loginUser(usuario).subscribe({
+        next: (response) => {
+          console.log('Respuesta del servidor:', response);
+          this.loginStatus = true;
+          console.log(this.loginStatus);
+          resolve(true); // Resuelve la promesa con el valor true
+        },
+        error: (err) => {
+          console.error('Error al verificar el correo:', err);
+          this.loginStatus = false;
+          console.log(this.loginStatus);
+          resolve(false); // Resuelve la promesa con el valor false
+        }
+      });
+    });
+  }
+
+
+  loginUserCasesManager(value: boolean){
+    if(value){
+      this._snackBar.open(
+        'Bienvenido de nuevo',
+        '🎉',
+        {
+          duration: 2000,
+          horizontalPosition:'end',
+          verticalPosition: 'top',
+        }
+      );
+      this.dialog.closeAll();
+    } else{
+      this._snackBar.open(
+        'Correo o contraseña incorrectos',
+        '❌',
+        {
+          duration: 2000,
+          horizontalPosition:'end',
+          verticalPosition: 'top',
+        }
+      );
+    }
+  }
+
+
   clickNextButton() {
     console.log('BOTON CORREO APRETADO');
     if(!this.clickNextButtonValue){
@@ -176,6 +227,18 @@ export class EmailCheckItemsComponent {
     }else{
       //CMMT EXPLN Se envia la informacion al servicio de autenticacion para verificar el correo y la contraseña
       if(this.inputFormNameCont == 'contrasena'){
+        const usuario = Usuario.fromCorreoYContrasena(
+          this.emailFormGroup.get('correo')?.value,
+          this.emailFormGroup.get('contrasena')?.value
+        );
+        this.loginUser(usuario).then((loginStatus) => {
+          // Llama a changeFieldValues con el resultado
+          this.loginUserCasesManager(loginStatus);
+          //this.clickNextButtonValue = false;
+          //this.inputBoolValue = true;
+          // Se actualiza después de verificar el correo
+
+        });
 
         //this.emailNextButtonCLick.emit(this.clickNextButtonValue);
 

@@ -19,6 +19,8 @@ export const appConfig: ApplicationConfig = {
   providers:
   [
 
+
+    //CMMT EXPLN Importacion de los temas de primeNG
     providePrimeNG({
       theme: {
           //preset: Aura
