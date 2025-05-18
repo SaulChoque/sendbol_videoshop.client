@@ -14,7 +14,7 @@ import Aura from '@primeng/themes/aura';
 import MyPreset from '../styles/primeng.preset';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
-
+import { environment } from '../environments/environment.prod';
 export const appConfig: ApplicationConfig = {
   providers:
   [
