@@ -60,9 +60,19 @@
 
 .card{
   margin: 2%;
+  width: 70vw;
   background-color: transparent;
   --cui-card-border-color: var(--mat-fab-small-foreground-color);
   color: var(--mat-fab-small-foreground-color);
   //border: var(--cui-card-border-width) solid rgb(255 255 255);
   border-radius: var(--cui-card-border-radius)
+}
+
+
+.homeContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
 }

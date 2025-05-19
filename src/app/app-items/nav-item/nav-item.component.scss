@@ -4,11 +4,40 @@
 
 
 
-
+/*
 .mat-toolbar {
   background-color: transparent !important;
-  //box-shadow: none; /* Opcional: elimina la sombra si está presente */
+  display: flex;
+  flex-direction: column;
+  //box-shadow: none;
 }
+*/
+
+.navbar {
+  border: 2px solid var(--mat-fab-small-foreground-color); /* Cambia el color del borde a blanco */
+  border-radius: 15px; /* Bordes redondeados */
+  margin: 1%;
+  padding: 1%;
+  padding-bottom: 0.2%;
+  background-color: #5d1c22;
+  box-shadow: 7px 7px 7px 7px rgba(0, 0, 0, 0.235) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+.searchbarSection{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+}
+
 
 .title{
   display: flex;
@@ -55,23 +84,17 @@
   font-size: 1.5em;
 }
 
-.navbar {
-  border: 2px solid var(--mat-fab-small-foreground-color); /* Cambia el color del borde a blanco */
-  border-radius: 15px; /* Bordes redondeados */
-  margin: 1%;
-  padding: 1%;
-  background-color: #5d1c22;
-  box-shadow: 7px 7px 7px 7px rgba(0, 0, 0, 0.235) !important;
-}
 
 .inner-navbar{
   gap: 1rem;
 }
 
+/*
 .p-inputtext {
   background: #5d1c22;
   border: 2px solid white;
 }
+
 
 .p-inputgroupaddon {
   background: transparent;
@@ -84,7 +107,7 @@
 .p-inputgroupaddon:last-child {
   border-inline-end: 1px solid white;
 }
-
+*/
 .searchbar{
   @include mat.form-field-overrides((
     outlined-outline-width: 3px,

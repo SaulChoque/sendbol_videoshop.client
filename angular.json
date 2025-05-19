@@ -42,6 +42,7 @@
               "src/styles.scss",
               "src/m3-theme.scss",
               "node_modules/aos/dist/aos.css"
+              
 
 
             ],
