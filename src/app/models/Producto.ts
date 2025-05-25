@@ -1,20 +1,19 @@
 export class Producto {
   constructor(
-    public id: number,
+    public Id: string,
     public titulo: string,
     public precio: number,
     public cantidad: number,
     public descripcion: string,
     public imagenes: string[], // Cambiado a vector de strings
-    public categoria: string,
-    public plataforma: string,
+    public Categoria: string,
+    public Plataformas: string[],
     public stock: number,
-    public fecha: string,
-    public rating: string,
-    public likes: string,
-    public dislikes: string,
-    public etiquetas: string[], // Cambiado a vector de strings
-
+    public fecha: Date,
+    public rating: number,
+    public likes: number,
+    public dislikes: number,
+    public Etiquetas: string[], // Cambiado a vector de strings
   ){}
   // ...código existente...
 

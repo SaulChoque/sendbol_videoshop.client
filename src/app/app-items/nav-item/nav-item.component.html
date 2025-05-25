@@ -1,80 +1,34 @@
-<!-- CMMT COMPU -->
-@if(currentBreakpoint == breakpoints.XLarge || currentBreakpoint ==
-breakpoints.Large || currentBreakpoint == breakpoints.Medium){
-<div class="navbar">
-
+<!-- NAVBAR DESKTOP -->
+@if(currentBreakpoint == breakpoints.XLarge || currentBreakpoint == breakpoints.Large || currentBreakpoint == breakpoints.Medium) {
+  <div class="navbar">
     <div class="searchbarSection">
-
-
       <div class="logobrand">
         <span class="title" id="titlePc">
-          <span class="sendbol" id="titlePc">
-            <h4>sendbol</h4>
-          </span>
-          <span class="video" id="titlePc">
-            <h4>VIDEOSHOP</h4>
-          </span>
+          <span class="sendbol"><h4>sendbol</h4></span>
+          <span class="video"><h4>VIDEOSHOP</h4></span>
         </span>
       </div>
-      <!--
-
-        <mat-form-field>
-          <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide() ? 'password' : 'text'" />
-          <button
-            mat-icon-button
-            matSuffix
-            (click)="clickEvent($event)"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide()"
-          >
-            <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-        </mat-form-field>
-        -->
       <div class="searchbar">
-        <mat-form-field appearance="outline" style="width:30vw; margin-bottom: -1.25em;">
-          <input matInput placeholder="Buscar" />
+        <mat-form-field appearance="outline" class="searchbar-field">
+          <input matInput placeholder="Buscar juegos, cuentas, tarjetas de regalo y mas! 🎮📽️" />
           <button mat-icon-button matSuffix>
-            <mat-icon matSuffix>search</mat-icon>
+            <mat-icon>search</mat-icon>
           </button>
         </mat-form-field>
       </div>
-            <!--
-                <p-inputgroup>
-                  <input pInputText placeholder="Keyword" />
-                  <p-inputgroup-addon>
-                    <button mat-fab aria-label="Account">
-
-                      <mat-icon>search</mat-icon>
-
-                    </button>
-                  </p-inputgroup-addon>
-                </p-inputgroup>
-
-
-        -->
       <div class="buttons">
         <span class="buttonSpacer">
-          <button mat-fab aria-label="Account" [matMenuTriggerFor]="menu" >
+          <button mat-fab aria-label="Account" [matMenuTriggerFor]="menu">
             <mat-icon>person</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
             @if (usuarioExists) {
-            <button mat-menu-item>
-
-              {{usuarioEnSesion?.nombre}}
-            </button>
-
-            }@else {
-            <button mat-menu-item (click)="openDialog()">
-              Acceder
-            </button>
+              <button mat-menu-item>{{usuarioEnSesion?.nombre}}</button>
+            } @else {
+              <button mat-menu-item (click)="openDialog()">Acceder</button>
             }
-
           </mat-menu>
         </span>
-
         <span class="buttonSpacer">
           <button mat-fab aria-label="Shopping cart">
             <mat-icon>shopping_cart</mat-icon>
@@ -83,58 +37,47 @@ breakpoints.Large || currentBreakpoint == breakpoints.Medium){
       </div>
     </div>
 
+
     <div class="dropdownSection">
-      <div class="dropdownSection">
-        <button mat-button [matMenuTriggerFor]="menuCategorias">Categorias</button>
-        <mat-menu #menuCategorias="matMenu" >
-          <button mat-menu-item>sidasd</button>
-          <button mat-menu-item>aksjdh</button>
-        </mat-menu>
+      <button mat-button [matMenuTriggerFor]="menuCategorias">
+        <mat-icon>menu</mat-icon>
+        <h6>
+          Categorias
+        </h6>
+      </button>
+      <mat-menu #menuCategorias="matMenu">
+        @for (categoria of categorias; track $index) {
+          <button mat-menu-item>{{categoria.titulo}}</button>
+        }
+      </mat-menu>
 
-        <button mat-button [matMenuTriggerFor]="menuVendidos">Lo mas vendido</button>
-        <mat-menu #menuVendidos="matMenu">
-          <button mat-menu-item>Item aja</button>
-          <button mat-menu-item>Item aja</button>
-        </mat-menu>
+      <button mat-button>
+        <mat-icon>favorite</mat-icon>
+        <h6>
+          Lo más vendido
+        </h6>
+      </button>
 
-        <button mat-button [matMenuTriggerFor]="menuMejor">Lo mejor</button>
-        <mat-menu #menuMejor="matMenu">
-          <button mat-menu-item>Item asd5</button>
-          <button mat-menu-item>Item asd5</button>
-        </mat-menu>
-      </div>
-
+      <button mat-button>
+        <mat-icon>attach_money</mat-icon>
+        <h6>
+          Lo mas barato
+        </h6>
+      </button>
 
     </div>
-
-</div>
-
+  </div>
 }
 
-<!-- CMMT CELULAR -->
-@else if (currentBreakpoint == breakpoints.XSmall || currentBreakpoint ==
-breakpoints.Small) {
-
-<div class="navbar">
-  <mat-toolbar class="inner-navbar">
-    <span class="title" id="titleCel">
-      <span class="sendbol" id="titleCel">
-        <h4>sendbol</h4>
+<!-- NAVBAR MOBILE -->
+@else if (currentBreakpoint == breakpoints.XSmall || currentBreakpoint == breakpoints.Small) {
+  <div class="navbar">
+    <mat-toolbar class="inner-navbar">
+      <span class="title" id="titleCel">
+        <span class="sendbol"><h4>sendbol</h4></span>
+        <span class="video"><h4>VIDEO</h4></span>
       </span>
-      <span class="video" id="titleCel">
-        <h4>VIDEO</h4>
-      </span>
-    </span>
-
-    <span class="example-spacer"></span>
-
-    <!--
-
-      <button mat-fab extended>
-        <mat-icon>favorite</mat-icon>
-        Re-sale
-      </button>
-      -->
-  </mat-toolbar>
-</div>
+      <span class="example-spacer"></span>
+    </mat-toolbar>
+  </div>
 }

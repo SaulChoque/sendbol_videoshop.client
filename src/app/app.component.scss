@@ -5,18 +5,18 @@ h4{
 
 
 
+
 /* src/app/app.component.css */
 /* src/app/app-items/footer-item/footer-item.component.css */
 header {
   position: fixed;
   top: 0;
-
   left: 0;
   width: 100%;
   z-index: 10; /* Or a higher value */
 }
 
 main {
-  margin-top: 10vh; /* Or the height of your header */
+  //margin-top: 10vh; /* Or the height of your header */
   /* Add other styling as needed */
 }

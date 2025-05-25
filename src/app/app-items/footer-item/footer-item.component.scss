@@ -1,7 +1,18 @@
-h4{
+
+
+.sendbol{
+  display: flex;
+  align-items: center;
+}
+
+.sendbol h4 {
   font-family: 'Typo-hoop';
   font-size: 2em;
-  margin: 15px;
+}
+
+.video h4 {
+  font-family: 'Cred';
+  font-size: 3.5em;
 }
 
 
@@ -16,25 +27,30 @@ h4{
 }
 
 .footer-item {
-
+  border-top: 2px solid var(--mat-fab-small-foreground-color);
+  border-right: 2px solid var(--mat-fab-small-foreground-color);
+  border-left: 2px solid var(--mat-fab-small-foreground-color);
+  border-bottom: none;
+  border-radius: 15px 15px 0 0;
   padding: 3rem;
+  margin: 1%;
   flex: 1 1 100%;
-  margin: 0.5rem 0;
-  color: #ffffff; /* Cambia el color de la fuente a blanco */
+  background-color: #5d1c22;
+  color: var(--mat-fab-small-foreground-color);/* Cambia el color de la fuente a blanco */
   //background-color: var(--mat-sidenav-content-background-color, var(--mat-app-background));
-
 }
+
 
 .footer-item h4, .footer-item h5 , .footer-item span{
   margin: 0;
-  color: #ffffff; /* Cambia el color de la fuente a blanco */
+  color: var(--mat-fab-small-foreground-color); /* Cambia el color de la fuente a blanco */
 }
 
 .footer-item mat-list-item {
 
   padding: 0;
 
-  color: #ffffff; /* Cambia el color de la fuente a blanco */
+  color: var(--mat-fab-small-foreground-color); /* Cambia el color de la fuente a blanco */
 }
 
 .socialLinks {

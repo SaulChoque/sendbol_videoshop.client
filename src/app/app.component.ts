@@ -15,9 +15,12 @@ import {MatMenuModule} from '@angular/material/menu';
 
 
 
+
 //CMMT: Importacion de componentes
 import { FooterItemComponent } from './app-items/footer-item/footer-item.component';
 import { NavItemComponent } from './app-items/nav-item/nav-item.component';
+import { PlataformasService } from './services/plataformas.service';
+import { ChiptagsService } from './services/chiptags.service';
 
 
 @Component({
@@ -29,10 +32,20 @@ import { NavItemComponent } from './app-items/nav-item/nav-item.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-
+export class AppComponent implements OnInit {
+  // Use dependency injection in the constructor
+  constructor(
+    private plataformaService: PlataformasService,
+    private chiptagService: ChiptagsService
+  ) {}
 
   title = 'sendbol_streaming';
 
-  
+  ngOnInit(): void {
+    this.plataformaService.obtenerPlataformas().subscribe();
+    this.chiptagService.obtenerChiptags().subscribe();
+    //this.plataformaService.obtenerPlataformas().subscribe(plataformas => {
+    //  this.plataformas = plataformas;
+    //});
+  }
 }

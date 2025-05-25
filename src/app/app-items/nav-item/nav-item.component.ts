@@ -13,6 +13,11 @@ import { AuthService } from '../../services/auth.service';
 import { Usuario } from '../../models/Usuario';
 import { MediaQueryService } from '../../services/media-query.service';
 import { Breakpoints } from '@angular/cdk/layout';
+import { Categoria } from '../../models/Categoria';
+import { CategoriasService } from '../../services/categorias.service';
+
+Categoria
+
 
 @Component({
   selector: 'app-nav-item',
@@ -35,6 +40,7 @@ export class NavItemComponent implements OnInit {
   usuarioExists = false;
   currentBreakpoint?: string;
   currentWidth?: string;
+  categorias: Categoria[] = [];
 
   @Input() breakpoints = Breakpoints;
 //  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
@@ -44,6 +50,7 @@ export class NavItemComponent implements OnInit {
   constructor(
     private mediaQueryService: MediaQueryService,
     private authService: AuthService,
+    private categoriasService: CategoriasService
   ) {}
 
   ngOnInit() {
@@ -53,6 +60,10 @@ export class NavItemComponent implements OnInit {
     });
 
     this.currentWidth = this.mediaQueryService.returnWidth();
+
+    this.categoriasService.obtenerCategorias().subscribe(categorias => {
+      this.categorias = categorias;
+    });
 
     // ...existing code...
     this.authService.getSessionUser().subscribe({

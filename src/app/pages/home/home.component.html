@@ -1,38 +1,45 @@
 <!--CMMT CRRSL Main carrousel-->
+<div class="carouselPaddingDiv" data-aos="fade-down">
 
-<div class="carousel">
-
-  <c-carousel>
-    <c-carousel-indicators />
-    <c-carousel-inner>
-      @for (slide of slides; track slide.src) {
+  <div class="carouselPage" >
+    <c-carousel [animate]="true" [pause]="'hover'" [interval]="3000">
+      <c-carousel-indicators />
+      <c-carousel-inner style="width: fit-content;">
+        @for (slide of slides; track slide.src) {
         <c-carousel-item>
-          <img alt="{{slide.title}}" class="d-block w-100" loading="eager" src="{{slide.src}}" />
+          <img alt="{{slide.title}}" loading="eager" src="{{slide.src}}" />
+
           <c-carousel-caption class="d-none d-md-block">
-            <h3>{{ slide.title }}</h3>
-            <p>{{ slide.subtitle }}</p>
+            <div class="backgroundOpacityBox">
+              <h1>{{ slide.title }}</h1>
+              <h3>{{ slide.subtitle }}</h3>
+
+            </div>
           </c-carousel-caption>
         </c-carousel-item>
-      }
-    </c-carousel-inner>
-    <c-carousel-control [routerLink] caption="Previous" direction="prev" />
-    <c-carousel-control [routerLink] caption="Next" direction="next" />
-  </c-carousel>
-
+        }
+      </c-carousel-inner>
+      <c-carousel-control [routerLink] caption="Previous" direction="prev" />
+      <c-carousel-control [routerLink] caption="Next" direction="next" />
+    </c-carousel>
+  </div>
 </div>
 
 <div class="homeContainer">
   <!--CMMT FOR Items -->
-  <div class="flex-container" [class.mat-elevation-z8]="true">
-    <!--CMMT FOR primer for primera linea-->
-    @for (producto of productos.slice(0, 6); track $index) {
-    <app-card-item [producto]="producto" loading="eager"></app-card-item>
-    }
-  </div>
 
+  <div class="flex-background-component" >
+
+    <div class="flex-container" [class.mat-elevation-z8]="true" data-aos="zoom-in">
+      <!--CMMT FOR primer for primera linea--> 
+      @for (producto of productos.slice(0, 6); track $index) {
+      <app-card-item [producto]="producto" loading="eager"></app-card-item>
+      }
+    </div>
+  </div>
   <!--CMMT CRRSL Items-->
-  <div class="card">
-    <p-carousel [value]="productos" [numVisible]="5" [numScroll]="4" [circular]="true"
+  <div class="card" data-aos="zoom-in">
+    <p-carousel [value]="productos" [numVisible]="5" [numScroll]="4" [circular]="false" [showNavigators]="false"
       [responsiveOptions]="responsiveOptions" [orientation]="'horizontal'" [autoplayInterval]="3000">
       <ng-template let-producto pTemplate="item">
         <app-card-item [producto]="producto" loading="eager"></app-card-item>

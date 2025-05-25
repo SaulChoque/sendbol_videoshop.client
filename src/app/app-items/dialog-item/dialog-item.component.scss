@@ -8,10 +8,16 @@
 }
 .infoPanel{
   padding: 1%;
-  width: 15vh;
+  width: 15vw;
   display: flex;
   flex-direction: column; /* O row, dependiendo de cómo quieras organizar los elementos */
   gap: 1rem;
+}
+
+.likesPanel{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .ratingPanel{

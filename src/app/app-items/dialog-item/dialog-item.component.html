@@ -10,10 +10,10 @@
         <p-galleria [value]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '450px' }"
           [numVisible]="5">
           <ng-template #item let-item>
-            <img [src]="item.itemImageSrc" style="width:100%" />
+            <img [src]="'./assets/images/products/' + item" style="width:100%" />
           </ng-template>
           <ng-template #thumbnail let-item>
-            <img [src]="item.thumbnailImageSrc" />
+            <img [src]="'./assets/images/products/' + item" width="80" height="60" style="object-fit:cover;" />
           </ng-template>
         </p-galleria>
       </span>
@@ -24,10 +24,9 @@
 
       <span>
         <mat-chip-set aria-label="Fish selection">
-          <mat-chip>One fish</mat-chip>
-          <mat-chip>Two fish</mat-chip>
-          <mat-chip>Three fish</mat-chip>
-          <mat-chip disabled>Four fish</mat-chip>
+          @for (chip of chiptags; track $index) {
+          <mat-chip>{{chip}}</mat-chip>
+          }
         </mat-chip-set>
       </span>
 
@@ -38,23 +37,35 @@
 
     <div class="infoPanel">
       <span class="titleTex">
-        <h1 mat-dialog-title>{{data.nombre}} </h1>
-        <h2 mat-dialog-title>{{data.precio}} </h2>
+        <h1 mat-dialog-title>{{data.titulo}} </h1>
+        <h2 mat-dialog-title>Bs. {{data.precio}} </h2>
       </span>
 
 
       <span class="ratingPanel">
-        <span>
-          <button mat-icon-button aria-label="me gusta">
+        <span class="likesPanel">
+
+          <h4>{{data.likes}}</h4>
+          <button
+          mat-icon-button aria-label="me gusta"
+          (click)="onLike()">
+
             <mat-icon>thumb_up</mat-icon>
           </button>
-          <button mat-icon-button aria-label="no me gusta">
+          <button
+          mat-icon-button aria-label="no me gusta"
+          (click)="onDislike()"
+          >
             <mat-icon>thumb_down</mat-icon>
           </button>
+          <h4>{{data.dislikes}}</h4>
         </span>
 
         <span>
-          <p-rating />
+          <p-rating
+          [(ngModel)]="data.rating"
+          (onRate)="onRate($event)"
+          />
         </span>
       </span>
     </div>
@@ -68,6 +79,8 @@
         <h4>1</h4>
         <button mat-stroked-button>+</button>
       </span>
+
+
       <div class="purButtons">
 
         <button mat-flat-button>

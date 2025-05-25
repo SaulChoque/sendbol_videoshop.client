@@ -1,26 +1,25 @@
-<mat-accordion class="example-headers-align" multi
-id="card{{producto?.id}}"
-class="example-card"
-appearance="outlined"
-(mouseenter)="mouseEnter()"
-(mouseleave)="mouseLeave()"
->
-<mat-expansion-panel [expanded]="isExpanded">
-  <mat-expansion-panel-header>
-    <span class="mat-content">
+<mat-accordion class="example-headers-align" multi id="card{{producto?.Id}}" class="example-card" appearance="outlined"
+  (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">
+  <mat-expansion-panel [expanded]="isExpanded">
+    <mat-expansion-panel-header>
+      <span class="mat-content">
 
 
-    <mat-panel-title style="background-image: url({{producto?.imagen}});">
+        <mat-panel-title
+          [style.background-image]="'url(' + ('./assets/images/products/' + (producto?.imagenes?.[0] || './assets/images/products/default-image.webp')) + ')'"
+          style="background-size: cover; background-position: center; background-repeat: no-repeat;">
 
-    </mat-panel-title>
+        </mat-panel-title>
 
-      <mat-card-title>{{producto?.nombre}}</mat-card-title>
-      <mat-card-subtitle>{{producto?.marca}}</mat-card-subtitle>
-      <p>
-        {{producto?.id}}
-      </p>
-    </span>
-  </mat-expansion-panel-header>
+        <mat-card-title>{{producto?.titulo}}</mat-card-title>
+        <div class="svgContainer">
+          @for (plataforma of plataformas; track $index) {
+            <app-svg-icon [name]="plataforma" width="32px" height="32px" fill="currentColor"></app-svg-icon>
+          }
+        </div>
+
+      </span>
+    </mat-expansion-panel-header>
 
 
     <button mat-button (click)="openDialog(producto)">Comprar</button>
@@ -29,5 +28,5 @@ appearance="outlined"
     </button>
 
 
-</mat-expansion-panel>
+  </mat-expansion-panel>
 </mat-accordion>

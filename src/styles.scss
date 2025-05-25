@@ -24,7 +24,7 @@ html {
   /* You can add global styles to this file, and also import other style files */
 
 
-  
+
   @font-face {
   font-family: 'Opificio';
   src: url(assets/fonts/opificio/opificio_regular.ttf) format('truetype');
@@ -62,13 +62,15 @@ html {
 }
 
 
-/*
 :host {
   display: flex;
-}
-*/
+  }
+  /*
+  */
 html, body {
   height: 100%;
+  //position: relative;
+  //z-index: 10;
 }
 
 
@@ -102,10 +104,12 @@ html, body {
   }
 }
 */
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #5d1c22;
+
+
   //background-color: var(--mat-app-background-color);
   //overflow-x: hidden;
   //overflow-y: unset;
@@ -113,10 +117,21 @@ body {
 
 }
 
-/* This is just to transition when you change the viewport size. */
-* {
-  transition: all 0.5s ease-out;
+
+
+.gradient-disabled{
+    background-image: url('./assets/images/backgrounds/background.png');
+  background-repeat: repeat;
+  //width: fit-content;
+  //height: 100%;
+  //position: fixed;
+  //z-index: -1;
 }
+
+/* This is just to transition when you change the viewport size. */
+//* {
+//  transition: all 0.5s ease-out;
+//}
 /*
 .cdk-global-scrollblock{
   //overflow-y: unset;
