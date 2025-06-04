@@ -1,0 +1,61 @@
+<div class="asideContainer">
+  <div class="rangoSlider">
+    <h4>Rango de precio</h4>
+    <mat-slider min="0" max="1000" style="width: 100%;">
+      <input
+      #sliderStart
+      [(ngModel)]="valueStart"
+      matSliderStartThumb
+      value="300"
+      (change)="onPrecioChange()"
+      >
+      <input
+      #sliderEnd
+      [(ngModel)]="valueEnd"
+      matSliderEndThumb
+      value="400"
+      (change)="onPrecioChange()"
+      >
+    </mat-slider>
+    <div class="sliderValues">
+      <span>Bs. {{sliderStart.value}}</span>
+      <span>Bs. {{sliderEnd.value}}</span>
+    </div>
+  </div>
+
+
+
+  <div class="categoriasContainer">
+    <h4>Categorías</h4>
+    <mat-form-field  class="categoriasField" placeholder="Kevin" style="width: 100%;">
+      <mat-select (selectionChange)="onCategoriaChange($event.value)">
+        @for (categoria of categorias; track $index) {
+        <mat-option [value]="categoria.Id">{{categoria.titulo}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+
+  <div class="plataformasContainer">
+    <h4>Plataformas</h4>
+    <div class="plataformasCheckboxes">
+      @for (plataforma of plataformas; track $index) {
+        <mat-checkbox
+        (change)="onPlataformaChange(plataforma.Id)"
+        >
+          <app-svg-icon [name]="plataforma.icon" class="plataformaIcon" ></app-svg-icon>
+          <span>
+            {{plataforma.nombre}}
+          </span>
+        </mat-checkbox>
+      }
+    </div>
+
+  </div>
+
+
+
+</div>
+

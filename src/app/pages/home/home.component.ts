@@ -24,6 +24,7 @@ import {
 
 
 import { ProductosService } from '../../services/productos.service'; // Agrega la importación
+import { StorageService } from '../../services/storage.service';
 
 
 @Component({
@@ -51,16 +52,25 @@ export class HomeComponent implements OnInit {
 
   productos: Producto[] = [];
 
-  constructor(private productosService: ProductosService) {}
+  constructor(
+    private productosService: ProductosService,
+    private storageService: StorageService
+  ) {}
 
   ngOnInit(): void {
     this.productosService.obtenerProductos().subscribe(productos => {
       this.productos = productos;
     });
     console.log('asdasdasdasdasdasd');
-    
+
     AOS.init();
   }
+
+  getHomeImageUrl(filename: string) {
+    const basicUrl = 'images/carrousel/'
+    return this.storageService.getImageUrl(basicUrl+filename);
+  }
+
 
 
   slides = [

@@ -1,17 +1,15 @@
 @use '@angular/material' as mat;
 @use 'm3-theme.scss' as m3-theme;
+@use '@coreui/coreui/scss/coreui';
 
 
-@use '@coreui/coreui/scss/coreui' as * with (
-  $enable-deprecation-messages: false
-  );
 
   //@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
   // Import Chart.js custom tooltips styles
   //@use '@coreui/chartjs/scss/coreui-chartjs' as *;
 
 
-@include mat.core();
+//@include mat.core();
 /*
 html {
   @include mat.all-component-colors(m3-theme.$light-theme);
@@ -22,7 +20,6 @@ html {
   /*
 
   /* You can add global styles to this file, and also import other style files */
-
 
 
   @font-face {
@@ -108,13 +105,19 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-
+  color: white;
 
   //background-color: var(--mat-app-background-color);
   //overflow-x: hidden;
   //overflow-y: unset;
 
 
+}
+
+//CMMT REEMPLAZANDO ESTILOS DE COREUI
+.card{
+  background-color:transparent;
+  color: var(--mat-stepper-header-selected-state-label-text-color, var(--mat-sys-on-surface-variant));
 }
 
 
@@ -180,4 +183,5 @@ body {
   font-optical-sizing: auto;
   font-weight: 1000 px;
   font-style: normal;
+  //--cui-body-color
 }

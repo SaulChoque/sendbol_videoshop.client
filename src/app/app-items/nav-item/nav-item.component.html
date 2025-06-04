@@ -3,10 +3,10 @@
   <div class="navbar">
     <div class="searchbarSection">
       <div class="logobrand">
-        <span class="title" id="titlePc">
+        <a routerLink="" class="title" id="titlePc">
           <span class="sendbol"><h4>sendbol</h4></span>
           <span class="video"><h4>VIDEOSHOP</h4></span>
-        </span>
+        </a>
       </div>
       <div class="searchbar">
         <mat-form-field appearance="outline" class="searchbar-field">
@@ -23,15 +23,47 @@
           </button>
           <mat-menu #menu="matMenu">
             @if (usuarioExists) {
-              <button mat-menu-item>{{usuarioEnSesion?.nombre}}</button>
+              <mat-card class="user-card" appearance="outlined">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>
+                    {{usuarioEnSesion?.nombre}}
+                    {{usuarioEnSesion?.apellido}}
+                  </mat-card-title>
+                  <mat-card-subtitle>
+                    <button mat-button>gestionar mi cuenta</button></mat-card-subtitle>
+                </mat-card-header>
+
+                  <mat-card-actions>
+                    <button
+                    mat-stroked-button
+
+                    >
+                      <mat-icon>logout</mat-icon>
+                      Cerrar Sesion
+                    </button>
+                  </mat-card-actions>
+              </mat-card>
+
+
             } @else {
-              <button mat-menu-item (click)="openDialog()">Acceder</button>
+              <button mat-menu-item (click)="openDialog('userManagement')">Acceder</button>
             }
           </mat-menu>
         </span>
         <span class="buttonSpacer">
           <button mat-fab aria-label="Shopping cart">
+
             <mat-icon>shopping_cart</mat-icon>
+          </button>
+        </span>
+        <span class="buttonSpacer">
+          <button
+          mat-fab aria-label="Store"
+          (click)="openDialog('upload')"
+          >
+
+            <mat-icon>storefront</mat-icon>
           </button>
         </span>
       </div>
@@ -51,17 +83,17 @@
         }
       </mat-menu>
 
-      <button mat-button>
+      <button mat-button [routerLink]="['filtro/mas-gustado']">
         <mat-icon>favorite</mat-icon>
         <h6>
-          Lo más vendido
+          Lo más gustado
         </h6>
       </button>
 
       <button mat-button>
         <mat-icon>attach_money</mat-icon>
         <h6>
-          Lo mas barato
+          Lo más barato
         </h6>
       </button>
 

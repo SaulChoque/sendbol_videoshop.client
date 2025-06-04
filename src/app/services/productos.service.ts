@@ -106,6 +106,21 @@ export class ProductosService {
       );
     }
 
+    // ...existing code...
+    filtrarProductos(
+      filtros: {
+        categoria?: string,
+        plataforma?: string,
+        min?: number,
+        max?: number,
+        sortBy?: string,
+        sortOrder?: boolean
+      }
+    ) {
+      return this.http.get<Producto[]>(`${this.baseURL}/filtrar`, { params: filtros });
+    }
+    // ...existing code...
+
   // ...existing code...
 
 

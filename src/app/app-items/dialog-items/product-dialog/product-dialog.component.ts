@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import {
-  MatDialog,
   MAT_DIALOG_DATA,
   MatDialogTitle,
   MatDialogContent,
@@ -9,18 +8,21 @@ import {
 import { GalleriaModule } from 'primeng/galleria';
 import { RatingModule } from 'primeng/rating';
 
-import { Producto } from './../../models/Producto';
+import { Producto } from '../../../models/Producto';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { FormsModule } from '@angular/forms';
-import { ProductosService } from '../../services/productos.service'; // Importa el servicio
-import { ChiptagsService } from '../../services/chiptags.service';
-
+import { ProductosService } from '../../../services/productos.service'; // Importa el servicio
+import { ChiptagsService } from '../../../services/chiptags.service';
+import { PlataformasService } from '../../../services/plataformas.service';
+import { SvgIconComponent } from '../../../canvas/svg-icon/svg-icon.component';
+import { Plataforma } from '../../../models/Plataforma';
+import { StorageService } from '../../../services/storage.service';
 
 
 @Component({
-  selector: 'app-dialog-item',
+  selector: 'app-product-dialog',
   imports: [
     MatDialogTitle,
     MatDialogContent,
@@ -29,18 +31,22 @@ import { ChiptagsService } from '../../services/chiptags.service';
     MatIcon,
     RatingModule,
     MatChipsModule,
-    FormsModule
+    FormsModule,
+    SvgIconComponent
   ],
-  templateUrl: './dialog-item.component.html',
-  styleUrl: './dialog-item.component.scss'
+  templateUrl: './product-dialog.component.html',
+  styleUrl: './product-dialog.component.scss'
 })
-export class DialogItemComponent {
+export class ProductDialogComponent {
   images: string[] = [];
   chiptags: string[] = [];
+  plataformas: Plataforma[] = [];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Producto,
     private productosService: ProductosService, // Inyecta el servicio
-    private chiptagsService: ChiptagsService, // Inyecta el servicio
+    private chiptagsService: ChiptagsService,
+    private plataformasService: PlataformasService,
+    private storageService: StorageService
   )
   {
     this.images = this.data.imagenes;
@@ -55,6 +61,20 @@ export class DialogItemComponent {
         this.chiptags.push(chiptag.tag);
       }
     }
+    for (let i = 0; i < this.data.Plataformas.length; i++) {
+      //console.log('AAAAAAAAAAAAAAAAJAJAJA');
+      const plataforma = this.plataformasService.obtenerPlataformaPorId(this.data.Plataformas[i]);
+      //console.log(plataforma);
+      //console.log(chiptag);
+      if (plataforma !== undefined) {
+        this.plataformas.push(plataforma);
+      }
+    }
+  }
+
+  getProductsImageUrl(filename: string) {
+    const basicUrl = 'images/products/'
+    return this.storageService.getImageUrl(basicUrl+filename);
   }
 
   responsiveOptions: any[] = [

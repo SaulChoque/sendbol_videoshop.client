@@ -60,3 +60,9 @@
   font-size: 3em;
   line-height: 1; /* Ajusta el valor para definir el espacio entre líneas */
 }
+
+.chipsContainer{
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+}

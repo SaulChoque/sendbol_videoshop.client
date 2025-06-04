@@ -1,0 +1,49 @@
+@use '@angular/material' as mat;
+
+.asideContainer {
+  border: 3px solid var(--mat-fab-small-foreground-color);
+  border-radius: 15px;
+
+  color: var(--mat-fab-small-foreground-color);
+  background-color: #5d1c22;
+  box-shadow: 7px 7px 7px 7px rgba(0, 0, 0, 0.235) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  width: 15vw;
+
+}
+
+.sliderValues {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  //font-weight: bold;
+}
+
+.rangoSlider {
+  padding: 15% 15% 10% 15%;
+  border-bottom: 2px solid var(--mat-fab-small-foreground-color);
+  @include mat.slider-overrides((
+      //value-indicator-width: 14vw,
+      //handle-width: 14vw,
+      //with-overlap-handle-outline-width: 14vw,
+    ));
+}
+.categoriasContainer {
+  padding: 10% 10% 10% 10%;
+  border-bottom: 2px solid var(--mat-fab-small-foreground-color);
+}
+.plataformasContainer {
+  padding: 10% 10% 10% 10%;
+  //border-bottom: 2px solid var(--mat-fab-small-foreground-color);
+}
+
+.plataformasCheckboxes span{
+  font-size: 1.2rem;
+}
+.plataformasCheckboxes{
+  display: flex;
+  flex-direction: column;
+}

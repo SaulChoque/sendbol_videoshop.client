@@ -13,6 +13,7 @@ import { Usuario } from '../../../models/Usuario';
 import { FinishReloadItemComponent } from '../../snackbar-item/finish-reload-item/finish-reload-item.component';
 import { left, start } from '@popperjs/core';
 import {MatDialog} from '@angular/material/dialog';
+import { StorageService } from '../../../services/storage.service';
 @Component({
   selector: 'app-user-management-dialog',
   imports: [
@@ -31,9 +32,16 @@ export class UserManagementDialogComponent {
   private _snackBar = inject(MatSnackBar);
   usuario?: Usuario;
 
-  constructor() {
-  }
+  constructor(
+    private storageService: StorageService
+  ) {}
   condition =  -1;
+
+
+  getDialogImageUrl(filename: string) {
+    const basicUrl = 'images/login/'
+    return this.storageService.getImageUrl(basicUrl+filename);
+  }
 
   changePage(index: number) {
     //console.log('apretado PADRECOMPONENT');

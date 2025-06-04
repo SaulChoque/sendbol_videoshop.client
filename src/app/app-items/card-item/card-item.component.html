@@ -6,12 +6,12 @@
 
 
         <mat-panel-title
-          [style.background-image]="'url(' + ('./assets/images/products/' + (producto?.imagenes?.[0] || './assets/images/products/default-image.webp')) + ')'"
+                    [style.background-image]="'url(' + getCardImageUrl(producto?.imagenes?.[0] || 'default-image.webp') + ')'"
           style="background-size: cover; background-position: center; background-repeat: no-repeat;">
 
         </mat-panel-title>
 
-        <mat-card-title>{{producto?.titulo}}</mat-card-title>
+        <mat-card-title class="producto-item">{{producto?.titulo}}</mat-card-title>
         <div class="svgContainer">
           @for (plataforma of plataformas; track $index) {
             <app-svg-icon [name]="plataforma" width="32px" height="32px" fill="currentColor"></app-svg-icon>

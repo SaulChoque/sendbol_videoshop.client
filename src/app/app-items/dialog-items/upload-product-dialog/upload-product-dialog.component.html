@@ -1,0 +1,92 @@
+<div class="upload-container">
+
+
+  <mat-stepper linear=false #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+
+      <form [formGroup]="firstFormGroup">
+        <div class="step-container">
+
+          <ng-template matStepLabel>Llena los datos</ng-template>
+
+          <mat-form-field>
+            <mat-label>Titulo</mat-label>
+            <input matInput placeholder="GTA 6 Licencia Steam" formControlName="firstCtrl" required>
+          </mat-form-field>
+          <!-- ------------------------- -->
+          <mat-form-field>
+            <mat-label>Descripcion</mat-label>
+            <input matInput placeholder="Licencia para GTA 6 en steam aplicable..." formControlName="firstCtrl" required>
+          </mat-form-field>
+          <!-- ------------------------- -->
+          <mat-form-field class="categoriasField" style="width: 100%;">
+            <mat-select>
+              @for (categoria of categorias; track $index) {
+              <mat-option [value]="categoria.Id">{{categoria.titulo}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <!-- ------------------------- -->
+          <mat-form-field class="categoriasField" style="width: 100%;">
+            <mat-select>
+              @for (plataforma of plataformas; track $index) {
+              <mat-option [value]="plataforma.Id">
+                <app-svg-icon [name]="plataforma.icon" class="plataformaIcon"></app-svg-icon>
+                <span>
+                  {{plataforma.nombre}}
+                </span>
+              </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Siguiente</button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+
+    <mat-step [stepControl]="secondFormGroup" label="Sube tus imagenes">
+
+      <form [formGroup]="secondFormGroup">
+        <div class="step-container">
+
+          <div class="card">
+
+            <p-fileupload chooseLabel="Seleccionar imagenes" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUpload($event)"
+              [multiple]="true" accept="image/*" maxFileSize="1000000" >
+              <ng-template #empty>
+                <div>Arrastra tus imagenes aqui para subirlas.</div>
+              </ng-template>
+              <ng-template #content>
+                @if( uploadedFiles && uploadedFiles.length > 0 ) {
+                  <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                }
+
+              </ng-template>
+            </p-fileupload>
+          </div>
+
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+
+    <mat-step>
+      <div class="step-container">
+
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

@@ -1,0 +1,67 @@
+h2{
+  font-family: 'Typo-hoop';
+  text-decoration: none; /* Elimina el subrayado */
+  font-size: 3em;
+}
+
+.containerFilter
+{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 2%;
+}
+
+.asideTree{
+  position: sticky;
+  top: 20px;
+  padding: 10px; /* Opcional: agrega padding para separación */
+  align-self: flex-start;
+}
+
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  padding: 10px; /* Opcional: agrega padding para separación */
+}
+.textContainer span {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--mat-fab-small-foreground-color);
+}
+.chiptagsContainer {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+  background-color: rgba(75, 28, 28, 0.8);
+  border: 3px solid #ffdbd166;
+  border-radius: 15px;
+}
+.productosContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+}
+/*
+#contCel.textContainer {
+  flex: 0 0 65%;
+}
+
+#contCel h3{
+  font-family: 'Typo-hoop';
+  text-decoration: none;
+  color: var(--primary-color-text, var(--mat-text-color));
+  font-size: 2em;
+}
+*/
+
+
+.headerSpacer{
+  padding-top: 9%;
+}
+

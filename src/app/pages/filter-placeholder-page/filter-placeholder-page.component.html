@@ -1,0 +1,86 @@
+
+
+<!-- CMMT PC VERSION -->
+
+@if(currentBreakpoint == breakpoints.XLarge || currentBreakpoint == breakpoints.Large || currentBreakpoint == breakpoints.Medium){
+  <div class="headerSpacer">
+
+  </div>
+
+  <div id="contPc" class="containerFilter">
+
+    <aside data-aos="fade-right" class="asideTree">
+      <app-aside-tree-item
+        (categoriaSeleccionada)="categoriaSeleccionada = $event; aplicarFiltros()"
+        (plataformaSeleccionada)="plataformaSeleccionada = $event; aplicarFiltros()"
+        (precioCambiado)="precioMin = $event.min; precioMax = $event.max; aplicarFiltros()">
+      </app-aside-tree-item>
+    </aside>
+
+    <div class="textContainer">
+      <span>Etiquetas</span>
+      <div class="chiptagsContainer">
+
+        @for (chiptag of chiptags; track $index) {
+          <mat-chip-option>
+            {{chiptag.tag}}
+          </mat-chip-option>
+        }
+
+      </div>
+      <span>Ordenrar por</span>
+      <div>
+        <p>
+:
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" multiple>
+          <mat-button-toggle value="alfa">
+            <mat-icon>sort_by_alpha</mat-icon>
+            Alfabeticamente
+          </mat-button-toggle>
+          <mat-button-toggle value="precio">
+            <mat-icon>paid</mat-icon>
+            Por precio
+          </mat-button-toggle>
+          <mat-button-toggle value="likes">
+            <mat-icon>thumb_up</mat-icon>
+            Por recuento de likes
+          </mat-button-toggle>
+          <mat-button-toggle value="estrellas">
+            <mat-icon>star</mat-icon>
+            Por calificación
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </p>
+      </div>
+
+      <span>Productos encontrados:</span>
+      <div class="productosContainer">
+        @for (producto of productos; track $index) {
+          <app-card-item [producto]="producto" loading="eager">
+
+          </app-card-item>
+        }
+      </div>
+
+
+
+
+
+    </div>
+
+  </div>
+}
+
+<!--CMMT TELEFONOS -->
+@else if (currentBreakpoint == breakpoints.XSmall || currentBreakpoint == breakpoints.Small) {
+  <div id="contCel" class="container">
+
+    <div class="textContainer">
+
+    </div>
+
+  </div>
+
+}
+
+

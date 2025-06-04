@@ -1,4 +1,14 @@
+@use '@angular/material' as mat;
 
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+.producto-item {
+  @include mat.card-overrides((
+    title-text-size: 16px,
+    title-text-weight: 500,
+    title-text-line-height: 24px,
+  ));
+  letter-spacing: 0.144px
+}
 .mat-expansion-panel{
   //background-color: #5d1c22;
   background-color: #672b22 ;

@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialog } from '@angular/material/dialog';
-import { UserManagementDialogComponent } from '../dialog-item/user-management-dialog/user-management-dialog.component';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { AuthService } from '../../services/auth.service';
 import { Usuario } from '../../models/Usuario';
@@ -15,9 +14,10 @@ import { MediaQueryService } from '../../services/media-query.service';
 import { Breakpoints } from '@angular/cdk/layout';
 import { Categoria } from '../../models/Categoria';
 import { CategoriasService } from '../../services/categorias.service';
+import { MatCardModule } from '@angular/material/card';
 
-Categoria
-
+import { UserManagementDialogComponent } from '../dialog-items/user-management-dialog/user-management-dialog.component';
+import { UploadProductDialogComponent } from '../dialog-items/upload-product-dialog/upload-product-dialog.component';
 
 @Component({
   selector: 'app-nav-item',
@@ -28,7 +28,8 @@ Categoria
     MatToolbarModule,
     RouterModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule,
   ],
   templateUrl: './nav-item.component.html',
   styleUrl: './nav-item.component.scss',
@@ -69,9 +70,11 @@ export class NavItemComponent implements OnInit {
     this.authService.getSessionUser().subscribe({
       next: (usuario) => {
         this.usuarioEnSesion = usuario as Usuario;
+        console.log('Usuario en sesión:', this.usuarioEnSesion);
         this.usuarioExists = true;
       },
       error: () => {
+        console.error('Error al obtener el usuario en sesión');
         this.usuarioEnSesion = undefined;
         this.usuarioExists = false;
       }
@@ -79,15 +82,30 @@ export class NavItemComponent implements OnInit {
     // ...existing code...
   }
 
-  openDialog() {
-    this.dialog.open(
-      UserManagementDialogComponent,
-      {
-        minHeight: 'fit-content',
-        minWidth: '40vw',
-        scrollStrategy: new NoopScrollStrategy()
-      }
-    );
+  openDialog(dialogType: string) {
+    switch (dialogType) {
+      case 'userManagement':
+        this.dialog.open(
+          UserManagementDialogComponent,
+          {
+            minHeight: 'fit-content',
+            minWidth: '40vw',
+            scrollStrategy: new NoopScrollStrategy()
+          }
+        );
+        break;
+      case 'upload':
+        this.dialog.open(
+          UploadProductDialogComponent,
+          {
+            minHeight: '40vh',
+            minWidth: '40vw',
+            scrollStrategy: new NoopScrollStrategy()
+          }
+        );
+        break;
+
+    }
   }
 /*
   someMethod(bool: boolean) {

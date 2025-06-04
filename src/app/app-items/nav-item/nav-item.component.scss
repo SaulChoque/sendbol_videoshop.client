@@ -38,7 +38,9 @@
   display: flex;
   align-items: center;
 }
-
+a {
+  text-decoration: none;
+}
 .title {
   display: flex;
   flex-direction: row;
@@ -55,6 +57,7 @@
 }
 
 .sendbol h4 {
+
   font-family: 'Typo-hoop';
   font-size: 2em;
 }
@@ -92,11 +95,23 @@
 .buttons {
   display: flex;
   align-items: center;
+
+
 }
 
 .buttonSpacer {
   margin: 0.5rem;
   padding: 0.5rem;
+  @include mat.menu-overrides((
+    container-color: orange,
+    container-shape: 150px,
+    divider-color: red,
+  ));
+
+  @include mat.card-overrides((
+    outlined-outline-width: 2000px
+  ));
+
 }
 
 
@@ -104,4 +119,13 @@ h6,h4 {
   padding: 0px;
   margin: 0px;
   line-height: 100%;
+}
+.user-card{
+  max-width: 400px;
+}
+
+
+.example-header-image {
+  background-image: url('https://material.angular.dev/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }

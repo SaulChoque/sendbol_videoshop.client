@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BestSellersComponent } from './best-sellers.component';
+import { ProductDialogComponent } from './product-dialog.component';
 
-describe('BestSellersComponent', () => {
-  let component: BestSellersComponent;
-  let fixture: ComponentFixture<BestSellersComponent>;
+describe('ProductDialogComponent', () => {
+  let component: ProductDialogComponent;
+  let fixture: ComponentFixture<ProductDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BestSellersComponent]
+      imports: [ProductDialogComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BestSellersComponent);
+    fixture = TestBed.createComponent(ProductDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

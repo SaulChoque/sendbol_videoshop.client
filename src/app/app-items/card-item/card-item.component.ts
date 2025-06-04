@@ -13,13 +13,14 @@ import {
   MAT_DIALOG_DATA,
   MatDialogTitle,
   MatDialogContent,
+
 } from '@angular/material/dialog';
 
-//import {DialogItemComponent} from '../dialog-item/dialog-item.component';
+//import {ProductDialogComponent} from '../dialog-itemss/dialog-items.component';
 import {Producto} from './../../models/Producto';
-import { DialogItemComponent } from '../dialog-item/dialog-item.component';
+import { ProductDialogComponent } from '../dialog-items/product-dialog/product-dialog.component';
 import { PlataformasService } from '../../services/plataformas.service';
-
+import { StorageService } from '../../services/storage.service';
 
 
 
@@ -40,6 +41,7 @@ export class CardItemComponent {
   constructor(
     public dialog: MatDialog,
     private plataformaService: PlataformasService,
+    private storageService: StorageService
 
   ) {}
 
@@ -66,6 +68,11 @@ export class CardItemComponent {
     }
   }
 
+  getCardImageUrl(filename: string) {
+    const basicUrl = 'images/products/'
+    return this.storageService.getImageUrl(basicUrl+filename);
+  }
+
   //@Input({required: true}) isExpanded?: boolean;
 
   mouseEnter(): void {
@@ -81,7 +88,7 @@ export class CardItemComponent {
 
 
   openDialog(productox?: Producto): void {
-    this.dialog.open(DialogItemComponent, {
+    this.dialog.open(ProductDialogComponent, {
 
       height: 'fit-content',
       minWidth: 'fit-content',
@@ -93,6 +100,8 @@ export class CardItemComponent {
 
     //console.log('Open dialog!');
   }
+
+
 }
 
 

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogItemComponent } from './dialog-item.component';
+import { AsideTreeItemComponent } from './aside-tree-item.component';
 
-describe('DialogItemComponent', () => {
-  let component: DialogItemComponent;
-  let fixture: ComponentFixture<DialogItemComponent>;
+describe('AsideTreeItemComponent', () => {
+  let component: AsideTreeItemComponent;
+  let fixture: ComponentFixture<AsideTreeItemComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogItemComponent]
+      imports: [AsideTreeItemComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DialogItemComponent);
+    fixture = TestBed.createComponent(AsideTreeItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

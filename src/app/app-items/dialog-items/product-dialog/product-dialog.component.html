@@ -10,25 +10,38 @@
         <p-galleria [value]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '450px' }"
           [numVisible]="5">
           <ng-template #item let-item>
-            <img [src]="'./assets/images/products/' + item" style="width:100%" />
+            <img [src]="getProductsImageUrl(item)" style="width:100%" />
           </ng-template>
           <ng-template #thumbnail let-item>
-            <img [src]="'./assets/images/products/' + item" width="80" height="60" style="object-fit:cover;" />
+            <img [src]="getProductsImageUrl(item)" width="80" height="60" style="object-fit:cover;" />
           </ng-template>
         </p-galleria>
       </span>
 
-      <span>
-        <h4>Etiquetas</h4>
-      </span>
 
-      <span>
-        <mat-chip-set aria-label="Fish selection">
-          @for (chip of chiptags; track $index) {
-          <mat-chip>{{chip}}</mat-chip>
-          }
-        </mat-chip-set>
-      </span>
+      <div class="chipsContainer">
+        <div>
+          <h4>Etiquetas</h4>
+          <mat-chip-set aria-label="Fish selection">
+            @for (chip of chiptags; track $index) {
+            <mat-chip>{{chip}}</mat-chip>
+            }
+          </mat-chip-set>
+        </div>
+        <div>
+          <h4>Plataformas</h4>
+          <mat-chip-set>
+            @for (plataforma of plataformas; track $index) {
+            <mat-chip>
+              <app-svg-icon
+              matChipAvatar
+              [name]="plataforma.icon" width="auto" height="auto" fill="currentColor" ></app-svg-icon>
+              {{plataforma.nombre}}
+            </mat-chip>
+            }
+          </mat-chip-set>
+        </div>
+      </div>
 
     </div>
 
