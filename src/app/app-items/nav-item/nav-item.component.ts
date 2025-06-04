@@ -107,6 +107,10 @@ export class NavItemComponent implements OnInit {
 
     }
   }
+
+  realizarBusqueda(busqueda: string) {
+    
+  }
 /*
   someMethod(bool: boolean) {
     if (this.trigger) {

@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
     this.productosService.obtenerProductos().subscribe(productos => {
       this.productos = productos;
     });
-    console.log('asdasdasdasdasdasd');
+    //console.log('asdasdasdasdasdasd');
 
     AOS.init();
   }

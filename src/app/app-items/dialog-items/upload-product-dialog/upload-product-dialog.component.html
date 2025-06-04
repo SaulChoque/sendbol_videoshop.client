@@ -11,26 +11,26 @@
 
           <mat-form-field>
             <mat-label>Titulo</mat-label>
-            <input matInput placeholder="GTA 6 Licencia Steam" formControlName="firstCtrl" required>
+            <input matInput placeholder="GTA 6 Licencia Steam" formControlName="titulo" required>
           </mat-form-field>
           <!-- ------------------------- -->
           <mat-form-field>
             <mat-label>Descripcion</mat-label>
-            <input matInput placeholder="Licencia para GTA 6 en steam aplicable..." formControlName="firstCtrl" required>
+            <input matInput placeholder="Licencia para GTA 6 en steam aplicable..." formControlName="desc" required>
           </mat-form-field>
           <!-- ------------------------- -->
-          <mat-form-field class="categoriasField" style="width: 100%;">
-            <mat-select>
+          <mat-form-field class="categoriasField" style="width: 100%;" >
+            <mat-select [(value)]="categSelected">
               @for (categoria of categorias; track $index) {
-              <mat-option [value]="categoria.Id">{{categoria.titulo}}</mat-option>
+              <mat-option [value]="categoria">{{categoria.titulo}}</mat-option>
               }
             </mat-select>
           </mat-form-field>
           <!-- ------------------------- -->
-          <mat-form-field class="categoriasField" style="width: 100%;">
-            <mat-select>
+          <mat-form-field class="categoriasField" style="width: 100%;" >
+            <mat-select [(value)]="platfSelected">
               @for (plataforma of plataformas; track $index) {
-              <mat-option [value]="plataforma.Id">
+              <mat-option [value]="plataforma">
                 <app-svg-icon [name]="plataforma.icon" class="plataformaIcon"></app-svg-icon>
                 <span>
                   {{plataforma.nombre}}
@@ -39,8 +39,26 @@
               }
             </mat-select>
           </mat-form-field>
+
+
           <div>
-            <button mat-button matStepperNext>Siguiente</button>
+          <mat-form-field>
+            <mat-label>Precio</mat-label>
+            <input matInput placeholder="Bs. 99" formControlName="Precio" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Cantidad</mat-label>
+            <input matInput placeholder="99" formControlName="Cantidad" required>
+          </mat-form-field>
+
+
+
+          </div>
+          <div>
+            <button mat-button matStepperNext
+            (click)="setProductoFinal()">
+              Siguiente
+            </button>
           </div>
         </div>
       </form>
@@ -69,8 +87,8 @@
           </div>
 
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+            <button mat-button matStepperPrevious>Atras</button>
+            <button mat-button matStepperNext>Siguiente</button>
           </div>
         </div>
       </form>
@@ -79,12 +97,31 @@
 
     <mat-step>
       <div class="step-container">
+        <ng-template matStepLabel>Vista previa</ng-template>
+        <h3>Vista previa del producto</h3>
+        <div *ngIf="productoFinal" class="preview-container">
+          <h4>{{ productoFinal.titulo }}</h4>
+          <div><strong>Categoría:</strong> {{ categSelected?.titulo }}</div>
+          <div><strong>Descripción:</strong> {{ productoFinal.descripcion }}</div>
+          <div><strong>Precio:</strong> {{ productoFinal.precio | currency:'BOB':'symbol':'1.2-2' }}</div>
+          <div><strong>Cantidad:</strong> {{ productoFinal.cantidad }}</div>
+          <div><strong>Plataformas:</strong> {{ productoFinal.Plataformas.join(', ') }}</div>
+          @if ( sanitizedImages && sanitizedImages.length > 0 ) {
 
-        <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
+            <div><strong>Imágenes:</strong></div>
+             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              @for (img of sanitizedImages; track $index) {
+                <img [src]="img" alt="Imagen producto"
+                     style="max-width: 120px; max-height: 120px; border-radius: 8px; border: 1px solid #ccc;">
+              }
+            </div>
+
+          }
+
+        </div>
+        <div style="margin-top: 16px;">
+          <button mat-button matStepperPrevious>Atras</button>
+          <button mat-button color="primary" (click)="subirProducto()">Confirmar y subir</button>
         </div>
       </div>
     </mat-step>

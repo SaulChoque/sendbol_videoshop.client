@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Chiptag } from '../models/Chiptag';
 import { BehaviorSubject, Observable, map } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 export class ChiptagsService {
   private chiptagsSubject = new BehaviorSubject<Chiptag[]>([]);
   chiptags$ = this.chiptagsSubject.asObservable();
-  baseURL = 'https://localhost:7053/api/Chiptags';
+  baseURL = environment.localmanagedUrl+'api/Chiptags';
 
   constructor(private http: HttpClient) {
     this.cargarChiptags(); // Carga inicial al instanciar el servicio

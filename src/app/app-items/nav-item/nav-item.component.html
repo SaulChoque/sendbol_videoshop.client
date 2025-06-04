@@ -11,7 +11,8 @@
       <div class="searchbar">
         <mat-form-field appearance="outline" class="searchbar-field">
           <input matInput placeholder="Buscar juegos, cuentas, tarjetas de regalo y mas! 🎮📽️" />
-          <button mat-icon-button matSuffix>
+          <button mat-icon-button matSuffix
+          [routerLink]="['filtro/search/']">
             <mat-icon>search</mat-icon>
           </button>
         </mat-form-field>

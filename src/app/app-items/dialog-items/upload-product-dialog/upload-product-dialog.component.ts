@@ -30,6 +30,9 @@ import { FileUpload } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { FileUploadEvent } from 'primeng/fileupload';
+import { StorageService } from '../../../services/storage.service';
+
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 /*
 interface UploadEvent {
     originalEvent: Event;
@@ -67,27 +70,140 @@ interface UploadEvent {
 
 
 
+// ...existing imports...
+
 export class UploadProductDialogComponent implements OnInit {
-  uploadedFiles: any[] = [];
+
+categSelected: Categoria | null = null;
+platfSelected: Plataforma | null = null;
+
+
+  uploadedFiles: File[] = [];
   plataformas: Plataforma[] = [];
   categorias: Categoria[] = [];
+  sanitizedImages: SafeUrl[] = [];
+
+  productoFinal!: Producto;
+
+  private _formBuilder = inject(FormBuilder);
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Producto,
-    private productosService: ProductosService, // Inyecta el servicio
+    private sanitizer: DomSanitizer,
+    private productosService: ProductosService,
     private chiptagsService: ChiptagsService,
     private plataformasService: PlataformasService,
     private categoriasService: CategoriasService,
+    private storageService: StorageService,
+  ) {}
 
-  ){}
+  firstFormGroup = this._formBuilder.group({
+    titulo: ['', Validators.required],
+    desc: ['', Validators.required],
+    Precio: ['', Validators.required],
+    Cantidad: ['', Validators.required],
+  });
 
-  onUpload(event: FileUploadEvent) {
-    for(let file of event.files) {
-        this.uploadedFiles.push(file);
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+
+  updateSanitizedImages() {
+    // Usa los archivos subidos (uploadedFiles) para la vista previa
+    if (this.uploadedFiles && this.uploadedFiles.length > 0) {
+      this.sanitizedImages = this.uploadedFiles.map((file: File) =>
+        this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file))
+      );
+    } else {
+      this.sanitizedImages = [];
     }
-    //this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
   }
 
+   setProductoFinal() {
+    const formValues = this.firstFormGroup.value;
+
+    this.productoFinal = new Producto(
+      '', // Id, se asignará en backend
+      formValues.titulo ?? '',
+      Number(formValues.Precio ?? 0),
+      Number(formValues.Cantidad ?? 0),
+      formValues.desc ?? '',
+      this.uploadedFiles.map(f => f.name), // imagenes
+      this.categSelected?.Id ?? '', // Categoria usando categSelected
+      Array.isArray(this.platfSelected?.Id) ? this.platfSelected.Id : [this.platfSelected?.Id ?? ''], // Plataformas usando platfSelected
+      Number(formValues.Cantidad ?? 0), // stock
+      new Date(), // fecha
+      0, // rating inicial
+      0, // likes inicial
+      0, // dislikes inicial
+      [] // Etiquetas
+    );
+
+    // Actualiza la vista previa de imágenes si es necesario
+    this.updateSanitizedImages();
+
+    console.log('Producto final:', this.productoFinal);
+  }
+
+  onUpload(event: any) {
+    for (let file of event.files) {
+      const nuevoNombre = `${Date.now()}_${file.name}`;
+      const renamedFile = new File([file], nuevoNombre, { type: file.type });
+      this.uploadedFiles.push(renamedFile);
+    }
+    this.updateSanitizedImages(); // Actualiza la vista previa después de subir
+  }
+
+  subirProducto() {
+    // 1. Subir imágenes al storage en la ruta "images/products/" y obtener los nombres/URLs
+    const uploadObservables = this.uploadedFiles.map(file => {
+      // Creamos un nuevo File con el mismo contenido pero cambiando el nombre para incluir la ruta
+      const nombreConRuta = `images/products/${file.name}`;
+      const fileWithPath = new File([file], nombreConRuta, { type: file.type });
+      return this.storageService.uploadImage(fileWithPath);
+    });
+
+    // Espera a que todas las imágenes se suban antes de crear el producto
+    Promise.all(uploadObservables.map(obs => obs.toPromise()))
+      .then((results: any[]) => {
+        // Si tu backend devuelve el nombre del archivo, úsalo aquí
+        // Si no, usa this.uploadedFiles.map(f => f.name)
+        const imagenes = results.map((res, idx) => {
+          // Si el backend devuelve { filename: 'images/products/archivo.jpg' }
+          // Extraemos solo el nombre del archivo para guardar en el producto
+          let fullName = res.filename || this.uploadedFiles[idx].name;
+          // Extraer solo el nombre del archivo (sin ruta)
+          const soloNombre = fullName.split('/').pop() || fullName;
+          return soloNombre;
+        });
+
+        // Actualiza las imágenes en productoFinal solo con el nombre
+        this.productoFinal.imagenes = imagenes;
+
+        // Actualiza sanitizedImages para la vista previa con las URLs del storage
+        this.sanitizedImages = imagenes.map(filename =>
+          this.sanitizer.bypassSecurityTrustUrl(
+            this.storageService.getImageUrl(`images/products/${filename}`)
+          )
+        );
+
+        // 2. Subir el producto usando el servicio de productos
+        this.productosService.agregarProducto(this.productoFinal).subscribe({
+          next: (productoCreado) => {
+            // Aquí puedes mostrar un mensaje de éxito o cerrar el diálogo
+            console.log('Producto creado:', productoCreado);
+          },
+          error: (err) => {
+            // Manejo de error
+            console.error('Error al crear producto:', err);
+          }
+        });
+      })
+      .catch(err => {
+        // Manejo de error en la subida de imágenes
+        console.error('Error al subir imágenes:', err);
+      });
+  }
 
   ngOnInit() {
     this.categoriasService.obtenerCategorias().subscribe(categorias => {
@@ -97,18 +213,4 @@ export class UploadProductDialogComponent implements OnInit {
       this.plataformas = plataformas;
     });
   }
-
-  private _formBuilder = inject(FormBuilder);
-
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
-  });
-
-
-
-
-
 }

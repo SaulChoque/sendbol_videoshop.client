@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../models/Usuario';
+import { environment } from '../../environments/environment.prod';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   constructor(private http: HttpClient) { }
-  baseURL = 'https://localhost:7053/api/Usuarios';
+  baseURL = environment.localmanagedUrl+'api/Usuarios';
 
   createUser(usuario?: Usuario) {
     if (usuario) {

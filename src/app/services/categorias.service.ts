@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Categoria } from '../models/Categoria';
 import { BehaviorSubject, Observable, map } from 'rxjs';
-
+import { environment } from '../../environments/environment.prod';
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriasService {
   private categoriasSubject = new BehaviorSubject<Categoria[]>([]);
   categorias$ = this.categoriasSubject.asObservable();
-  baseURL = 'https://localhost:7053/api/Categorias';
+  baseURL = environment.localmanagedUrl+'api/Categorias';
 
   constructor(private http: HttpClient) {
     this.cargarCategorias(); // Carga inicial al instanciar el servicio
@@ -31,7 +31,7 @@ export class CategoriasService {
   }
 
   // Devuelve una categoría por id desde la instancia local
-  obtenerCategoriaPorId(id: number): Categoria | undefined {
+  obtenerCategoriaPorId(id: string): Categoria | undefined {
     return this.categoriasSubject.value.find(cat => cat.Id === id);
   }
 }

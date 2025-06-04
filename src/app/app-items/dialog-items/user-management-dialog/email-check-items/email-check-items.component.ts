@@ -116,7 +116,7 @@ export class EmailCheckItemsComponent {
 
 
 
-    console.log('CAMBIO DE VALORES', value);
+    //console.log('CAMBIO DE VALORES', value);
     if (value) {
       this.dialogTitle = 'Iniciar sesión';
       this.dialogSubtitle = 'Ingresa tu correo y contraseña para continuar.';

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Plataforma } from '../models/Plataforma';
 import { BehaviorSubject, Observable, map } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 export class PlataformasService {
   private PlataformasSubject = new BehaviorSubject<Plataforma[]>([]);
   Plataformas$ = this.PlataformasSubject.asObservable();
-  baseURL = 'https://localhost:7053/api/Plataformas';
+  baseURL = environment.localmanagedUrl+'api/Plataformas';
 
   constructor(private http: HttpClient) {
     this.cargarPlataformas(); // Carga inicial al instanciar el servicio

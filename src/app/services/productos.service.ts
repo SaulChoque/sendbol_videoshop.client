@@ -2,14 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Producto } from '../models/Producto';
 import { Observable, map } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductosService {
   constructor(private http: HttpClient) { }
-  baseURL = 'https://localhost:7053/api/Productos';
+  baseURL = environment.localmanagedUrl+'api/Productos';
 
+// ...existing code...
+
+agregarProducto(producto: Producto): Observable<Producto> {
+  return this.http.post<Producto>(this.baseURL, producto);
+}
+
+// ...existing code...
 
 
   obtenerProductos(): Observable<Producto[]> {
@@ -119,6 +127,34 @@ export class ProductosService {
     ) {
       return this.http.get<Producto[]>(`${this.baseURL}/filtrar`, { params: filtros });
     }
+
+        // ...existing code...
+
+    buscarPorTitulo(q: string): Observable<Producto[]> {
+      return this.http.get<Producto[]>(`${this.baseURL}/search?q=${encodeURIComponent(q)}`).pipe(
+        map(data => data.map(item => new Producto(
+          item.Id,
+          item.titulo,
+          item.precio,
+          item.cantidad,
+          item.descripcion,
+          item.imagenes,
+          item.Categoria,
+          item.Plataformas,
+          item.stock,
+          item.fecha,
+          item.rating,
+          item.likes,
+          item.dislikes,
+          item.Etiquetas
+        )))
+      );
+    }
+
+    // ...existing code...
+
+
+
     // ...existing code...
 
   // ...existing code...

@@ -15,6 +15,8 @@ export class Producto {
     public dislikes: number,
     public Etiquetas: string[], // Cambiado a vector de strings
   ){}
+
+  
   // ...código existente...
 
 
