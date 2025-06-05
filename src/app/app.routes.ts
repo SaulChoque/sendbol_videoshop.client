@@ -12,6 +12,11 @@ export const routes: Routes = [
     path: 'filtro/:id',
     component: FilterPlaceholderPageComponent,
     title: 'Filtro',
+  },
+  {
+    path: 'filtrosearch/:id',
+    component: FilterPlaceholderPageComponent,
+    title: 'Filtro',
   }
 
 

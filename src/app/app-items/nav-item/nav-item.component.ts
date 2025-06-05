@@ -19,6 +19,9 @@ import { MatCardModule } from '@angular/material/card';
 import { UserManagementDialogComponent } from '../dialog-items/user-management-dialog/user-management-dialog.component';
 import { UploadProductDialogComponent } from '../dialog-items/upload-product-dialog/upload-product-dialog.component';
 
+
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-nav-item',
   imports: [
@@ -30,6 +33,8 @@ import { UploadProductDialogComponent } from '../dialog-items/upload-product-dia
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    CommonModule,
+    FormsModule,
   ],
   templateUrl: './nav-item.component.html',
   styleUrl: './nav-item.component.scss',
@@ -42,6 +47,10 @@ export class NavItemComponent implements OnInit {
   currentBreakpoint?: string;
   currentWidth?: string;
   categorias: Categoria[] = [];
+
+
+    // En tu componente
+  busqueda: string = '';
 
   @Input() breakpoints = Breakpoints;
 //  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
@@ -109,7 +118,7 @@ export class NavItemComponent implements OnInit {
   }
 
   realizarBusqueda(busqueda: string) {
-    
+
   }
 /*
   someMethod(bool: boolean) {

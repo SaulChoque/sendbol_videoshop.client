@@ -10,11 +10,13 @@
       </div>
       <div class="searchbar">
         <mat-form-field appearance="outline" class="searchbar-field">
-          <input matInput placeholder="Buscar juegos, cuentas, tarjetas de regalo y mas! 🎮📽️" />
+          <input matInput placeholder="Buscar juegos, cuentas, tarjetas de regalo y mas! 🎮📽️" [(ngModel)]="busqueda" name="busqueda"  />
           <button mat-icon-button matSuffix
-          [routerLink]="['filtro/search/']">
+          [routerLink]="['filtrosearch/', busqueda]">
             <mat-icon>search</mat-icon>
           </button>
+
+
         </mat-form-field>
       </div>
       <div class="buttons">
@@ -80,7 +82,11 @@
       </button>
       <mat-menu #menuCategorias="matMenu">
         @for (categoria of categorias; track $index) {
-          <button mat-menu-item>{{categoria.titulo}}</button>
+          <button mat-menu-item
+          [routerLink]="['filtro/mas-gustado']"
+          >
+          {{categoria.titulo}}
+        </button>
         }
       </mat-menu>
 

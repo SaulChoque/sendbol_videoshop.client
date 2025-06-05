@@ -75,23 +75,35 @@ export class FilterPlaceholderPageComponent {
 
     this.activatedRoute.params.subscribe(params => {
       let id = params['id'];
+      let flag = false;
       // Aquí puedes usar los parámetros id y guid según sea necesario
       switch (id) {
         case "mas-gustado":
           this.sortBy = 'likes';
+          flag = true;
 
 
           // Lógica para "mas-gustado"
           break;
         case "ranking":
           this.sortBy = 'ranking';
+          flag = true;
           // Lógica para "mejor-calificado"
           break;
         default:
+
           // Lógica para otros casos o valor por defecto
           break;
       }
-      this.aplicarFiltros();
+      if (flag) {
+        this.aplicarFiltros();
+      }
+      else{
+        // Si no se aplica ningún filtro, obtenemos todos los productos
+        this.productosService.buscarPorTitulo(id).subscribe(productos => {
+          this.productos = productos;
+        });
+      }
 
 
       // Realiza el desplazamiento suave hasta el principio de la página
