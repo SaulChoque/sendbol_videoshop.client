@@ -19,11 +19,11 @@
 
     <div class="textContainer">
       <span>Etiquetas</span>
-      <div class="chiptagsContainer">
+      <div class="etiquetasContainer">
 
-        @for (chiptag of chiptags; track $index) {
+        @for (etiqueta of etiquetas; track $index) {
           <mat-chip-option>
-            {{chiptag.tag}}
+            {{etiqueta.tag}}
           </mat-chip-option>
         }
 

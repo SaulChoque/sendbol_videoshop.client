@@ -56,3 +56,32 @@ h2#videoTxt{
 a{
   color: var(--mdc-outlined-button-label-text-color);
 }
+
+p{
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-direction: column;
+}
+
+.formInputs {
+  opacity: 0;
+  animation: fadeInOpacity 0.5s ease-out forwards;
+}
+.titleTex {
+  opacity: 0;
+  animation: fadeInOpacity 0.5s ease-out forwards;
+}
+
+@keyframes fadeInOpacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.formButtons {
+  transition: margin 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}

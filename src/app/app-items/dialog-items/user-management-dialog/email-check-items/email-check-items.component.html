@@ -26,8 +26,8 @@
   <form [formGroup]="emailFormGroup" class="formNames" (ngSubmit)="onSubmit()">
 
     <!--CMMT Componente Formulario Correo-->
-    <p>
-      <mat-form-field appearance="outline">
+    <p class="formInputs">
+      <mat-form-field appearance="outline" >
         <mat-label>Correo (personal o profesional)</mat-label>
 
         <input
@@ -47,9 +47,9 @@
 
     @if (clickNextButtonValue ) {
     <!--CMMT Componente Formulario Contraseña-->
-    <p>
+    <p class="formInputs">
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" >
         <mat-label>{{passwordField}}</mat-label>
 
         <input
@@ -69,7 +69,7 @@
     </p>
     }
 
-    <p>
+    <p class="formButtons">
       <button
       mat-flat-button
       (click)="clickNextButton()"

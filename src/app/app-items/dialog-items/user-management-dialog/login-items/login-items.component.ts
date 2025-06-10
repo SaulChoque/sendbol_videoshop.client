@@ -30,7 +30,7 @@ export class LoginItemsComponent {
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
-      console.log(user)
+      //console.log(user)
       //perform further logics
     });
   }
@@ -38,7 +38,7 @@ export class LoginItemsComponent {
 
   clickButton() {
     this.valueEmail = true;
-    //console.log('CORREO APRETADO');
+    ////console.log('CORREO APRETADO');
     this.emailButtonCLick.emit(this.valueEmail);
   }
 
@@ -65,7 +65,7 @@ export class LoginItemsComponent {
     loginWithGoogle() {
       this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((user: SocialUser) => {
         // Aquí puedes manejar el usuario autenticado
-        console.log('Usuario autenticado con Google:', user);
+        //console.log('Usuario autenticado con Google:', user);
         // Puedes emitir un evento o llamar a un servicio backend con el token
       }).catch(err => {
         console.error('Error en login con Google:', err);
@@ -75,7 +75,7 @@ export class LoginItemsComponent {
   onGoogleSignIn(user: any) {
     if (user && user.provider && user.email) {
       // Es un SocialUser válido
-      console.log('Usuario autenticado con Google:', user);
+      //console.log('Usuario autenticado con Google:', user);
       this.snackBarCasesManager(true);
     } else {
       console.error('No se recibió un SocialUser válido:', user);

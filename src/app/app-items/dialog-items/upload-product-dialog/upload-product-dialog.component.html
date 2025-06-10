@@ -1,129 +1,267 @@
 <div class="upload-container">
 
 
-  <mat-stepper linear=false #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-
-      <form [formGroup]="firstFormGroup">
-        <div class="step-container">
-
-          <ng-template matStepLabel>Llena los datos</ng-template>
-
-          <mat-form-field>
-            <mat-label>Titulo</mat-label>
-            <input matInput placeholder="GTA 6 Licencia Steam" formControlName="titulo" required>
-          </mat-form-field>
-          <!-- ------------------------- -->
-          <mat-form-field>
-            <mat-label>Descripcion</mat-label>
-            <input matInput placeholder="Licencia para GTA 6 en steam aplicable..." formControlName="desc" required>
-          </mat-form-field>
-          <!-- ------------------------- -->
-          <mat-form-field class="categoriasField" style="width: 100%;" >
-            <mat-select [(value)]="categSelected">
-              @for (categoria of categorias; track $index) {
-              <mat-option [value]="categoria">{{categoria.titulo}}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-          <!-- ------------------------- -->
-          <mat-form-field class="categoriasField" style="width: 100%;" >
-            <mat-select [(value)]="platfSelected">
-              @for (plataforma of plataformas; track $index) {
-              <mat-option [value]="plataforma">
-                <app-svg-icon [name]="plataforma.icon" class="plataformaIcon"></app-svg-icon>
-                <span>
-                  {{plataforma.nombre}}
-                </span>
-              </mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
+    <div class="dialogContentContainer">
+      <div class="infoPanel">
 
 
-          <div>
-          <mat-form-field>
-            <mat-label>Precio</mat-label>
-            <input matInput placeholder="Bs. 99" formControlName="Precio" required>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Cantidad</mat-label>
-            <input matInput placeholder="99" formControlName="Cantidad" required>
-          </mat-form-field>
+        <mat-stepper linear=false #stepper>
+          <mat-step [stepControl]="firstFormGroup">
+
+            <form [formGroup]="firstFormGroup">
+              <div class="step-container">
+
+                <ng-template matStepLabel>Llena los datos</ng-template>
+
+                <mat-form-field>
+                  <mat-label>Titulo</mat-label>
+                  <input matInput formControlName="titulo"  required>
+                </mat-form-field>
+                <!-- ------------------------- -->
+                <mat-form-field>
+                  <mat-label>Descripcion</mat-label>
+                  <input matInput placeholder="Licencia para GTA 6 en steam aplicable..." formControlName="desc"
+                    required>
+                </mat-form-field>
+                <!-- ------------------------- -->
+                <mat-form-field class="categoriasField" style="width: 100%;">
+                  <mat-label>Categorias</mat-label>
+                  <mat-select [(value)]="categSelected">
+                    @for (categoria of categorias; track $index) {
+                    <mat-option [value]="categoria">{{categoria.titulo}}</mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+                <!-- ------------------------- -->
+                <mat-form-field class="plataformasField" style="width: 100%;">
+                  <mat-label>Plataformas</mat-label>
+                  <mat-select [(value)]="platfSingularSelected">
+                    @for (plataforma of plataformas; track $index) {
+                    <mat-option [value]="plataforma">
+                      <mat-checkbox
+                      (change)="onPlataformaChange($event, plataforma)"
+                      >
+                        <app-svg-icon [name]="plataforma.icon" class="plataformaIcon"></app-svg-icon>
+                        <span>
+                          {{plataforma.nombre}}
+                        </span>
+                      </mat-checkbox>
+                    </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+                <!-- ------------------------- -->
+                <mat-form-field class="etiquetasField" style="width: 100%;">
+                  <mat-label>Etiquetas</mat-label>
+                  <mat-select [(value)]="etiqSingularSelected">
+                    @for (etiqueta of etiquetas; track $index) {
+                    <mat-option [value]="etiqueta">
+                      <mat-checkbox
+                      (change)="onEtiquetaChange($event, etiqueta)"
+                      >
+                        <span>
+                          {{etiqueta.tag}}
+                        </span>
+                      </mat-checkbox>
+                    </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
 
 
+                <div class="dataFields">
+                  <mat-form-field>
+                    <mat-label>Precio</mat-label>
+                    <input matInput placeholder="Bs. 99" formControlName="Precio" required>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Cantidad</mat-label>
+                    <input matInput placeholder="99" formControlName="Cantidad" required>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <button mat-button matStepperNext (click)="setProductoFinal()">
+                    Siguiente
+                  </button>
+                </div>
+              </div>
+            </form>
+          </mat-step>
 
-          </div>
-          <div>
-            <button mat-button matStepperNext
-            (click)="setProductoFinal()">
-              Siguiente
-            </button>
-          </div>
-        </div>
-      </form>
-    </mat-step>
+
+          <mat-step [stepControl]="secondFormGroup" label="Sube tus imagenes">
+
+            <form [formGroup]="secondFormGroup">
+              <div class="step-container">
+
+                <div class="card">
+
+                  <p-fileupload chooseLabel="Seleccionar imagenes" name="demo[]"
+                    url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUpload($event)" [multiple]="true"
+                    accept="image/*" maxFileSize="1000000">
+                    <ng-template #empty>
+                      <div>Arrastra tus imagenes aqui para subirlas.</div>
+                    </ng-template>
+                    <ng-template #content>
+                      @if( uploadedFiles && uploadedFiles.length > 0 ) {
+                      <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                      }
+
+                    </ng-template>
+                  </p-fileupload>
+                </div>
+
+                <div>
+                  <button mat-button matStepperPrevious>Atras</button>
+                  <button mat-button matStepperNext>Siguiente</button>
+                </div>
+              </div>
+            </form>
+          </mat-step>
 
 
-    <mat-step [stepControl]="secondFormGroup" label="Sube tus imagenes">
+          <mat-step>
+            <div class="step-container">
+              <ng-template matStepLabel>Vista previa</ng-template>
+              <h3>Vista previa del producto</h3>
+              <div *ngIf="productoFinal" class="preview-container">
+                <h4>{{ productoFinal.titulo }}</h4>
+                <div><strong>Categoría:</strong> {{ categSelected?.titulo }}</div>
+                <div><strong>Descripción:</strong> {{ productoFinal.descripcion }}</div>
+                <div><strong>Precio:</strong> {{ productoFinal.precio | currency:'BOB':'symbol':'1.2-2' }}</div>
+                <div><strong>Cantidad:</strong> {{ productoFinal.cantidad }}</div>
+                <div><strong>Plataformas:</strong>
+                  @for (platf of platfSelected; track $index) {
+                  {{ platf.nombre }}
+                  }
+                </div>
+                @if ( sanitizedImages && sanitizedImages.length > 0 ) {
 
-      <form [formGroup]="secondFormGroup">
-        <div class="step-container">
+                <div><strong>Imágenes:</strong></div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  @for (img of sanitizedImages; track $index) {
+                  <img [src]="img" alt="Imagen producto"
+                    style="max-width: 120px; max-height: 120px; border-radius: 8px; border: 1px solid #ccc;">
+                  }
+                </div>
 
-          <div class="card">
-
-            <p-fileupload chooseLabel="Seleccionar imagenes" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUpload($event)"
-              [multiple]="true" accept="image/*" maxFileSize="1000000" >
-              <ng-template #empty>
-                <div>Arrastra tus imagenes aqui para subirlas.</div>
-              </ng-template>
-              <ng-template #content>
-                @if( uploadedFiles && uploadedFiles.length > 0 ) {
-                  <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
                 }
 
-              </ng-template>
-            </p-fileupload>
-          </div>
+              </div>
+              <div style="margin-top: 16px;">
+                <button mat-button matStepperPrevious>Atras</button>
+                <button mat-button color="primary" (click)="subirProducto()">Confirmar y subir</button>
+              </div>
+            </div>
+          </mat-step>
+        </mat-stepper>
+      </div>
+      <div class="productPanel">
 
-          <div>
-            <button mat-button matStepperPrevious>Atras</button>
-            <button mat-button matStepperNext>Siguiente</button>
-          </div>
-        </div>
-      </form>
-    </mat-step>
+
+        <mat-card appearance="outlined" style="display: flex; flex-direction: row; padding: 2%;">
+          <div class="photoPanel">
+            <span>
+
+              <p-galleria [value]="productoImagesPreview()" [responsiveOptions]="responsiveOptions"
+                [containerStyle]="{ 'max-width': '450px' }" [numVisible]="5">
+                <ng-template #item let-item>
+                  <img [src]="item" style="width:200px" />
+                </ng-template>
+                <ng-template #thumbnail let-item>
+                  <img [src]="item" width="80" height="60" style="object-fit:cover;" />
+                </ng-template>
+              </p-galleria>
+            </span>
 
 
-    <mat-step>
-      <div class="step-container">
-        <ng-template matStepLabel>Vista previa</ng-template>
-        <h3>Vista previa del producto</h3>
-        <div *ngIf="productoFinal" class="preview-container">
-          <h4>{{ productoFinal.titulo }}</h4>
-          <div><strong>Categoría:</strong> {{ categSelected?.titulo }}</div>
-          <div><strong>Descripción:</strong> {{ productoFinal.descripcion }}</div>
-          <div><strong>Precio:</strong> {{ productoFinal.precio | currency:'BOB':'symbol':'1.2-2' }}</div>
-          <div><strong>Cantidad:</strong> {{ productoFinal.cantidad }}</div>
-          <div><strong>Plataformas:</strong> {{ productoFinal.Plataformas.join(', ') }}</div>
-          @if ( sanitizedImages && sanitizedImages.length > 0 ) {
-
-            <div><strong>Imágenes:</strong></div>
-             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-              @for (img of sanitizedImages; track $index) {
-                <img [src]="img" alt="Imagen producto"
-                     style="max-width: 120px; max-height: 120px; border-radius: 8px; border: 1px solid #ccc;">
-              }
+            <div class="chipsContainer">
+              <div>
+                <h4>Etiquetas</h4>
+                <mat-chip-set aria-label="Fish selection">
+                  @for (etiqueta of etiqSelected; track $index) {
+                  <mat-chip>{{etiqueta.tag}}</mat-chip>
+                  }
+                </mat-chip-set>
+              </div>
+              <div>
+                <h4>Plataformas</h4>
+                <mat-chip-set>
+                  @for (plataforma of platfSelected; track $index) {
+                  <mat-chip>
+                    <app-svg-icon matChipAvatar [name]="plataforma.icon" width="auto" height="auto"
+                      fill="currentColor"></app-svg-icon>
+                    {{plataforma.nombre}}
+                  </mat-chip>
+                  }
+                </mat-chip-set>
+              </div>
             </div>
 
-          }
+          </div>
 
-        </div>
-        <div style="margin-top: 16px;">
-          <button mat-button matStepperPrevious>Atras</button>
-          <button mat-button color="primary" (click)="subirProducto()">Confirmar y subir</button>
-        </div>
+
+
+
+          <div class="infoPanel">
+            <span class="titleTex">
+              <h1 mat-dialog-title>{{firstFormGroup.value.titulo}} </h1>
+              <h2 mat-dialog-title>Bs. {{firstFormGroup.value.Precio}} </h2>
+            </span>
+
+
+            <span class="ratingPanel">
+              <span class="likesPanel">
+
+                <h4>0</h4>
+                <button mat-icon-button aria-label="me gusta" >
+
+                  <mat-icon>thumb_up</mat-icon>
+                </button>
+                <button mat-icon-button aria-label="no me gusta" >
+                  <mat-icon>thumb_down</mat-icon>
+                </button>
+                <h4>0</h4>
+              </span>
+
+              <span>
+                <p-rating />
+              </span>
+            </span>
+          </div>
+
+
+
+          <div class=" purchasePanel">
+            {{firstFormGroup.value.desc}}
+            <span class="counterButtons">
+              <button mat-stroked-button>-</button>
+              <h4>1</h4>
+              <button mat-stroked-button>+</button>
+            </span>
+
+
+            <div class="purButtons">
+
+              <button mat-flat-button>
+                Lo quiero!
+                <mat-icon>shopping_cart_checkout</mat-icon>
+              </button>
+              <button mat-stroked-button>
+                Agregar al Carrito
+                <mat-icon>add_shopping_cart</mat-icon>
+              </button>
+              <button mat-fab extended>
+                <mat-icon>share</mat-icon>
+                Compartir
+              </button>
+
+            </div>
+
+          </div>
+        </mat-card>
+
+
       </div>
-    </mat-step>
-  </mat-stepper>
+    </div>
 </div>

@@ -10,8 +10,10 @@ import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/cor
 import { Usuario } from '../../../../models/Usuario';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../services/auth.service';
-
 import { CountryService, Country } from '../../../../services/country.service';
+
+
+
 @Component({
   selector: 'app-register-items',
   imports: [
@@ -53,7 +55,8 @@ export class RegisterItemsComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private countryService: CountryService) {
+    private countryService: CountryService
+  ) {
     this.registerFormGroup = this.fb.group({
       nombres: [
         '',
@@ -82,17 +85,21 @@ export class RegisterItemsComponent {
     });
   }
 
-  ngOnInit(): void {
-    console.log('ngOnInit USUARIO', this.usuario);
+  async ngOnInit(){
+    //console.log('ngOnInit USUARIO', this.usuario);
     // Llamar al servicio para obtener los países al inicializar el componente
+
     this.countryService.getCountries().subscribe({
       next: (data) => {
         this.countries = data; // Asigna los países al arreglo
+        //console.log('Países obtenidos:');
+        //console.log(data)
       },
       error: (err) => {
         console.error('Error al obtener los países:', err);
       },
     });
+
   }
 
 
@@ -100,7 +107,7 @@ export class RegisterItemsComponent {
     return new Promise((resolve, reject) => {
         this.authService.createUser(this.usuario).subscribe({
           next: (response) => {
-            console.log('Respuesta del servidor:', response);
+            //console.log('Respuesta del servidor:', response);
             //this.existsEmail = true;
             resolve(true); // Resuelve la promesa con el valor true
           },
@@ -119,7 +126,7 @@ export class RegisterItemsComponent {
 
   onSubmit() {
 
-    console.log('onSubmit', this.registerFormGroup.value);
+    //console.log('onSubmit', this.registerFormGroup.value);
 
     if (this.registerFormGroup.valid && this.usuario) {
       // Aquí puedes realizar la lógica para enviar los datos al servidor
@@ -129,14 +136,14 @@ export class RegisterItemsComponent {
       this.usuario.fechaNacimiento = this.registerFormGroup.get('fechaNacimiento')?.value;
       this.usuario.telefono = 1;
 
-      //console.log('Usuario a enviar:', this.usuario);
+      ////console.log('Usuario a enviar:', this.usuario);
 
       this.sendUser().then((existsEmail) => {
         // Llama a changeFieldValues con el resultado
         //this.changeFieldValues(existsEmail);
         //this.inputBoolValue = true;
         // Se actualiza después de verificar el correo
-        console.log('Usuario enviado:', this.usuario);
+        //console.log('Usuario enviado:', this.usuario);
         this.sendButtonClick.emit(true);
       }
       );

@@ -9,8 +9,8 @@ import AOS from 'aos';
 import { Breakpoints } from '@angular/cdk/layout';
 import { MediaQueryService } from '../../services/media-query.service';
 import { AsideTreeItemComponent } from '../../app-items/aside-tree-item/aside-tree-item.component';
-import { ChiptagsService } from '../../services/chiptags.service';
-import { Chiptag } from '../../models/Chiptag';
+import { EtiquetasService } from '../../services/etiquetas.service';
+import { Etiqueta } from '../../models/Etiqueta';
 import { MatChipsModule } from '@angular/material/chips';
 import { ProductosService } from '../../services/productos.service';
 import { Producto } from '../../models/Producto';
@@ -37,7 +37,7 @@ export class FilterPlaceholderPageComponent {
 
 
   showFiller = false;
-  chiptags: Chiptag[] = [];
+  etiquetas: Etiqueta[] = [];
   productos: Producto[] = [];
   categoriaSeleccionada?: string;
   plataformaSeleccionada?: string;
@@ -49,7 +49,7 @@ export class FilterPlaceholderPageComponent {
   constructor(
     private mediaQueryService: MediaQueryService,
     private activatedRoute: ActivatedRoute,
-    private chiptagsService: ChiptagsService,
+    private EtiquetasService: EtiquetasService,
     private productosService: ProductosService
   ) { }
 
@@ -64,12 +64,12 @@ export class FilterPlaceholderPageComponent {
       this.mediaQueryService.triggerProcesses();
       this.currentBreakpoint = this.mediaQueryService.returnBreakpoint();
     });
-    //this.chiptagsService.obtenerChiptags().subscribe((chiptags: Chiptag[]) => {
-    //  this.chiptags = chiptags;
+    //this.EtiquetasService.obtenerEtiquetas().subscribe((etiquetas: Etiqueta[]) => {
+    //  this.etiquetas = etiquetas;
     //}
     //);
-    this.chiptagsService.obtenerChiptags().subscribe((chiptags: Chiptag[]) => {
-      this.chiptags = chiptags;
+    this.EtiquetasService.obtenerEtiquetas().subscribe((etiquetas: Etiqueta[]) => {
+      this.etiquetas = etiquetas;
     }
     );
 

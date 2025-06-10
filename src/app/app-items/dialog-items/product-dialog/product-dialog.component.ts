@@ -14,7 +14,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { FormsModule } from '@angular/forms';
 import { ProductosService } from '../../../services/productos.service'; // Importa el servicio
-import { ChiptagsService } from '../../../services/chiptags.service';
+import { EtiquetasService } from '../../../services/etiquetas.service';
 import { PlataformasService } from '../../../services/plataformas.service';
 import { SvgIconComponent } from '../../../canvas/svg-icon/svg-icon.component';
 import { Plataforma } from '../../../models/Plataforma';
@@ -39,12 +39,12 @@ import { StorageService } from '../../../services/storage.service';
 })
 export class ProductDialogComponent {
   images: string[] = [];
-  chiptags: string[] = [];
+  etiquetas: string[] = [];
   plataformas: Plataforma[] = [];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Producto,
     private productosService: ProductosService, // Inyecta el servicio
-    private chiptagsService: ChiptagsService,
+    private EtiquetasService: EtiquetasService,
     private plataformasService: PlataformasService,
     private storageService: StorageService
   )
@@ -54,18 +54,18 @@ export class ProductDialogComponent {
 
   ngOnInit() {
     for (let i = 0; i < this.data.Etiquetas.length; i++) {
-      //console.log('AAAAAAAAAAAAAAAAJAJAJA');
-      const chiptag = this.chiptagsService.obtenerChiptagPorId(this.data.Etiquetas[i]);
-      //console.log(chiptag);
-      if (chiptag && chiptag.tag !== undefined) {
-        this.chiptags.push(chiptag.tag);
+      ////console.log('AAAAAAAAAAAAAAAAJAJAJA');
+      const etiqueta = this.EtiquetasService.obtenerEtiquetaPorId(this.data.Etiquetas[i]);
+      ////console.log(etiqueta);
+      if (etiqueta && etiqueta.tag !== undefined) {
+        this.etiquetas.push(etiqueta.tag);
       }
     }
     for (let i = 0; i < this.data.Plataformas.length; i++) {
-      //console.log('AAAAAAAAAAAAAAAAJAJAJA');
+      ////console.log('AAAAAAAAAAAAAAAAJAJAJA');
       const plataforma = this.plataformasService.obtenerPlataformaPorId(this.data.Plataformas[i]);
-      //console.log(plataforma);
-      //console.log(chiptag);
+      ////console.log(plataforma);
+      ////console.log(etiqueta);
       if (plataforma !== undefined) {
         this.plataformas.push(plataforma);
       }

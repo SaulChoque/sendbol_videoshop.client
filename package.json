@@ -30,6 +30,7 @@
     "@popperjs/core": "~2.11.8",
     "@primeng/themes": "^19.1.0",
     "@types/aos": "^3.0.7",
+    "@yusifaliyevpro/countries": "^2.2.1",
     "aos": "^2.3.4",
     "bootstrap": "^5.3.5",
     "jest-editor-support": "*",

@@ -3,7 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialog } from '@angular/material/dialog';
@@ -60,7 +60,8 @@ export class NavItemComponent implements OnInit {
   constructor(
     private mediaQueryService: MediaQueryService,
     private authService: AuthService,
-    private categoriasService: CategoriasService
+    private categoriasService: CategoriasService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -79,7 +80,7 @@ export class NavItemComponent implements OnInit {
     this.authService.getSessionUser().subscribe({
       next: (usuario) => {
         this.usuarioEnSesion = usuario as Usuario;
-        console.log('Usuario en sesión:', this.usuarioEnSesion);
+        //console.log('Usuario en sesión:', this.usuarioEnSesion);
         this.usuarioExists = true;
       },
       error: () => {
@@ -92,34 +93,45 @@ export class NavItemComponent implements OnInit {
   }
 
   openDialog(dialogType: string) {
-    switch (dialogType) {
-      case 'userManagement':
-        this.dialog.open(
-          UserManagementDialogComponent,
-          {
-            minHeight: 'fit-content',
-            minWidth: '40vw',
-            scrollStrategy: new NoopScrollStrategy()
-          }
-        );
-        break;
-      case 'upload':
-        this.dialog.open(
-          UploadProductDialogComponent,
-          {
-            minHeight: '40vh',
-            minWidth: '40vw',
-            scrollStrategy: new NoopScrollStrategy()
-          }
-        );
-        break;
+    if (this.usuarioExists) {
+      switch (dialogType) {
+        case 'upload':
+          this.dialog.open(
+            UploadProductDialogComponent,
+            {
+              minHeight: '50vh',
+              minWidth: '70vw',
+              scrollStrategy: new NoopScrollStrategy()
+            }
+          );
 
+          break;
+      }
+    } else {
+      this.dialog.open(
+        UserManagementDialogComponent,
+        {
+          minHeight: 'fit-content',
+          minWidth: '40vw',
+          scrollStrategy: new NoopScrollStrategy()
+        }
+      );
     }
   }
 
-  realizarBusqueda(busqueda: string) {
-
-  }
+// Agrega este método en nav-item.component.ts
+logout() {
+  this.authService.logout().subscribe({
+    next: () => {
+      this.usuarioEnSesion = undefined;
+      // Redirige si es necesario
+      window.location.reload();
+    },
+    error: (err) => {
+      console.error('Error al cerrar sesión:', err);
+    }
+  });
+}
 /*
   someMethod(bool: boolean) {
     if (this.trigger) {

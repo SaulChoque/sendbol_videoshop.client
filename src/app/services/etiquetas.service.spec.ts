@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ChiptagsService } from './chiptags.service';
+import { EtiquetasService } from './etiquetas.service';
 
-describe('ChiptagsService', () => {
-  let service: ChiptagsService;
+describe('EtiquetasService', () => {
+  let service: EtiquetasService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ChiptagsService);
+    service = TestBed.inject(EtiquetasService);
   });
 
   it('should be created', () => {

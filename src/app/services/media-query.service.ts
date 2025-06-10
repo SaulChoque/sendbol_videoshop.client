@@ -17,7 +17,7 @@ export class MediaQueryService {
     this.breakpoint$ = this.breakpointObserver
       .observe([Breakpoints.Large, Breakpoints.Medium, Breakpoints.Small, Breakpoints.XSmall, 'min-width: 500px'])
       .pipe(
-        //tap(value => console.log('ObservavbleBreakpointLook: ' + value)),
+        //tap(value => //console.log('ObservavbleBreakpointLook: ' + value)),
         distinctUntilChanged()
       );
 
@@ -61,13 +61,13 @@ export class MediaQueryService {
   }
 
     returnWidth() {
-      //console.log("Width: " + this.widths[0]);
+      ////console.log("Width: " + this.widths[0]);
       return this.widths[0];
     }
 
     returnBreakpoint(){
-      //console.log("Breakpoint: " + this.currentBreakpoint);
-      //console.log("Breakpoint Name: " + this.nameBreakpoint);
+      ////console.log("Breakpoint: " + this.currentBreakpoint);
+      ////console.log("Breakpoint Name: " + this.nameBreakpoint);
       return this.currentBreakpoint;
     }
 

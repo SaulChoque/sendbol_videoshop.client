@@ -3,6 +3,7 @@ import {
   MAT_DIALOG_DATA,
   MatDialogTitle,
   MatDialogContent,
+  MatDialog,
 } from '@angular/material/dialog';
 
 import { GalleriaModule } from 'primeng/galleria';
@@ -12,27 +13,31 @@ import { Producto } from '../../../models/Producto';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
-import {FormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductosService } from '../../../services/productos.service'; // Importa el servicio
-import { ChiptagsService } from '../../../services/chiptags.service';
+import { EtiquetasService } from '../../../services/etiquetas.service';
 import { PlataformasService } from '../../../services/plataformas.service';
 import { SvgIconComponent } from '../../../canvas/svg-icon/svg-icon.component';
 import { Plataforma } from '../../../models/Plataforma';
 import { MatOption, MatSelect } from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
 import { Categoria } from '../../../models/Categoria';
 import { CategoriasService } from '../../../services/categorias.service';
 
-import { MessageService } from 'primeng/api';
 import { FileUpload } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
-import { FileUploadEvent } from 'primeng/fileupload';
 import { StorageService } from '../../../services/storage.service';
 
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { MatCardModule } from '@angular/material/card';
+import { Etiqueta } from '../../../models/Etiqueta';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { first } from 'rxjs';
+
+
 /*
 interface UploadEvent {
     originalEvent: Event;
@@ -62,7 +67,9 @@ interface UploadEvent {
     MatOption,
     FileUpload,
     ToastModule,
-    ButtonModule
+    ButtonModule,
+    MatCardModule,
+    MatCheckboxModule
   ],
   templateUrl: './upload-product-dialog.component.html',
   styleUrl: './upload-product-dialog.component.scss'
@@ -74,28 +81,54 @@ interface UploadEvent {
 
 export class UploadProductDialogComponent implements OnInit {
 
-categSelected: Categoria | null = null;
-platfSelected: Plataforma | null = null;
+  categSelected: Categoria | null = null;
+
+
+  platfSingularSelected: Plataforma | null = null;
+  platfSelected: Plataforma[] = [];
+
+  etiqSingularSelected: Etiqueta | null = null;
+  etiqSelected: Etiqueta[] = [];
 
 
   uploadedFiles: File[] = [];
+  placeholderImages: String[] = [
+    './../../../../assets/images/placeholcer.webp',
+    './../../../../assets/images/placeholcer.webp',
+    './../../../../assets/images/placeholcer.webp'
+    // Placeholder image file
+  ] // Ruta de la imagen de placeholder
+
   plataformas: Plataforma[] = [];
   categorias: Categoria[] = [];
+  etiquetas: Etiqueta[] = [];
   sanitizedImages: SafeUrl[] = [];
 
   productoFinal!: Producto;
 
   private _formBuilder = inject(FormBuilder);
-
+  readonly dialog: MatDialog = inject(MatDialog);
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: Producto,
     private sanitizer: DomSanitizer,
     private productosService: ProductosService,
-    private chiptagsService: ChiptagsService,
+    private EtiquetasService: EtiquetasService,
     private plataformasService: PlataformasService,
     private categoriasService: CategoriasService,
     private storageService: StorageService,
-  ) {}
+  ) { }
+
+
+
+  responsiveOptions: any[] = [
+    {
+      breakpoint: '1300px',
+      numVisible: 4
+    },
+    {
+      breakpoint: '575px',
+      numVisible: 1
+    }
+  ];
 
   firstFormGroup = this._formBuilder.group({
     titulo: ['', Validators.required],
@@ -108,6 +141,69 @@ platfSelected: Plataforma | null = null;
     secondCtrl: ['', Validators.required],
   });
 
+  ngOnInit() {
+    this.categoriasService.obtenerCategorias().subscribe(categorias => {
+      this.categorias = categorias;
+    });
+    this.plataformasService.obtenerPlataformas().subscribe((plataformas: Plataforma[]) => {
+      this.plataformas = plataformas;
+    });
+    this.EtiquetasService.obtenerEtiquetas().subscribe((etiquetas: Etiqueta[]) => {
+      this.etiquetas = etiquetas;
+    });
+
+    this.firstFormGroup.get('titulo')?.setValue('Titulo del producto'); // Inicializa el título
+    this.firstFormGroup.get('desc')?.
+    setValue('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. '); // Inicializa el título
+  }
+
+  productoImagesPreview() {
+    if (this.uploadedFiles && this.uploadedFiles.length > 0) {
+      return this.sanitizedImages;
+    }
+    return this.placeholderImages; // Retorna las imágenes de placeholder si no hay archivos subidos
+  }
+
+
+
+
+  onPlataformaChange(event: any, plataforma: Plataforma) {
+    if (event.checked) {
+      // Agrega si no está ya en la lista
+      if (!this.platfSelected?.some(p => p.Id === plataforma.Id)) {
+        this.platfSelected?.push(plataforma);
+      }
+    } else {
+      // Quita si está en la lista
+      this.platfSelected = this.platfSelected?.filter(p => p.Id !== plataforma.Id) ?? null;
+    }
+  }
+
+  //CMMT Método para manejar la subida de imagenes
+  onUpload(event: any) {
+    for (let file of event.files) {
+      const nuevoNombre = `${Date.now()}_${file.name}`;
+      const renamedFile = new File([file], nuevoNombre, { type: file.type });
+      this.uploadedFiles.push(renamedFile);
+    }
+    this.updateSanitizedImages(); // Actualiza la vista previa después de subir
+  }
+
+  onEtiquetaChange(event: any, etiqueta: Etiqueta) {
+    if (event.checked) {
+      // Agrega si no está ya en la lista
+      if (!this.etiqSelected?.some(p => p.Id === etiqueta.Id)) {
+        this.etiqSelected?.push(etiqueta);
+      }
+    } else {
+      // Quita si está en la lista
+      this.etiqSelected = this.etiqSelected?.filter(p => p.Id !== etiqueta.Id) ?? null;
+    }
+  }
+
+
+
+
   updateSanitizedImages() {
     // Usa los archivos subidos (uploadedFiles) para la vista previa
     if (this.uploadedFiles && this.uploadedFiles.length > 0) {
@@ -119,7 +215,7 @@ platfSelected: Plataforma | null = null;
     }
   }
 
-   setProductoFinal() {
+  setProductoFinal() {
     const formValues = this.firstFormGroup.value;
 
     this.productoFinal = new Producto(
@@ -130,29 +226,22 @@ platfSelected: Plataforma | null = null;
       formValues.desc ?? '',
       this.uploadedFiles.map(f => f.name), // imagenes
       this.categSelected?.Id ?? '', // Categoria usando categSelected
-      Array.isArray(this.platfSelected?.Id) ? this.platfSelected.Id : [this.platfSelected?.Id ?? ''], // Plataformas usando platfSelected
+      this.platfSelected.map(p => p.Id), // Plataformas usando solo los IDs
       Number(formValues.Cantidad ?? 0), // stock
       new Date(), // fecha
       0, // rating inicial
       0, // likes inicial
       0, // dislikes inicial
-      [] // Etiquetas
+      this.etiqSelected.map(p => p.Id) // Etiquetas
     );
 
     // Actualiza la vista previa de imágenes si es necesario
     this.updateSanitizedImages();
 
-    console.log('Producto final:', this.productoFinal);
+    //console.log('Producto final:', this.productoFinal);
   }
 
-  onUpload(event: any) {
-    for (let file of event.files) {
-      const nuevoNombre = `${Date.now()}_${file.name}`;
-      const renamedFile = new File([file], nuevoNombre, { type: file.type });
-      this.uploadedFiles.push(renamedFile);
-    }
-    this.updateSanitizedImages(); // Actualiza la vista previa después de subir
-  }
+
 
   subirProducto() {
     // 1. Subir imágenes al storage en la ruta "images/products/" y obtener los nombres/URLs
@@ -191,7 +280,7 @@ platfSelected: Plataforma | null = null;
         this.productosService.agregarProducto(this.productoFinal).subscribe({
           next: (productoCreado) => {
             // Aquí puedes mostrar un mensaje de éxito o cerrar el diálogo
-            console.log('Producto creado:', productoCreado);
+            //console.log('Producto creado:', productoCreado);
           },
           error: (err) => {
             // Manejo de error
@@ -203,14 +292,8 @@ platfSelected: Plataforma | null = null;
         // Manejo de error en la subida de imágenes
         console.error('Error al subir imágenes:', err);
       });
-  }
+      this.dialog.closeAll(); // Cierra el diálogo después de subir el producto
+    }
 
-  ngOnInit() {
-    this.categoriasService.obtenerCategorias().subscribe(categorias => {
-      this.categorias = categorias;
-    });
-    this.plataformasService.obtenerPlataformas().subscribe((plataformas: Plataforma[]) => {
-      this.plataformas = plataformas;
-    });
-  }
+
 }

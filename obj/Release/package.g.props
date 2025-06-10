@@ -29,7 +29,6 @@
     <PackageJsonDependenciesPopperjsCore Condition="$(PackageJsonDependenciesPopperjsCore) == ''">~2.11.8</PackageJsonDependenciesPopperjsCore>
     <PackageJsonDependenciesPrimengThemes Condition="$(PackageJsonDependenciesPrimengThemes) == ''">^19.1.0</PackageJsonDependenciesPrimengThemes>
     <PackageJsonDependenciesTypesAos Condition="$(PackageJsonDependenciesTypesAos) == ''">^3.0.7</PackageJsonDependenciesTypesAos>
-    <PackageJsonDependenciesYusifaliyevproCountries Condition="$(PackageJsonDependenciesYusifaliyevproCountries) == ''">^2.2.1</PackageJsonDependenciesYusifaliyevproCountries>
     <PackageJsonDependenciesAos Condition="$(PackageJsonDependenciesAos) == ''">^2.3.4</PackageJsonDependenciesAos>
     <PackageJsonDependenciesBootstrap Condition="$(PackageJsonDependenciesBootstrap) == ''">^5.3.5</PackageJsonDependenciesBootstrap>
     <PackageJsonDependenciesJestEditorSupport Condition="$(PackageJsonDependenciesJestEditorSupport) == ''">*</PackageJsonDependenciesJestEditorSupport>

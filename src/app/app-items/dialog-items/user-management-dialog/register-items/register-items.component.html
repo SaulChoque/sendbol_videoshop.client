@@ -53,7 +53,9 @@
       formControlName="pais"
     >
       @for (country of countries; track country) {
-        <mat-option [value]="country.name">{{country.name}}</mat-option>
+
+          <mat-option [value]="country.name">{{country.name}}</mat-option>
+          
       }
     </mat-select>
   </mat-form-field>

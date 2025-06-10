@@ -1,9 +1,149 @@
-.upload-container{
-  margin: 1%;
+@use '@angular/material' as mat;
+
+
+
+
+.dialogContentContainer {
+  display: flex; /* Cambia a flexbox */
+  flex-direction: row; /* Asegura que los elementos estén en fila horizontal */
+  justify-content: space-between; /* Espaciado entre los elementos */
+  align-items: stretch; /* Asegura que los hijos llenen la altura del contenedor */
+  //width: 100%; /* Asegúrate de que el contenedor ocupe todo el ancho disponible */
+  height: 100%; /* Asegúrate de que tenga una altura definida */
+  //row-gap: 5rem; /* Espacio entre los elementos */
+  padding: 2%;
 }
 
-.step-container{
-  margin: 3%;
+.infoPanel {
+  height: 39vh;
+  flex: 0 0 30%; /* Ocupa el 60% del ancho */
+  padding: 5%;
+}
+
+.productPanel {
+  flex: 0 0 60%; /* Ocupa el 40% del ancho */
+  //height: 100%; /* Llena la altura del contenedor padre */
+  //background-image: url('./../../../../assets/images/login/i2.png');
+  background-size: cover; /* Asegura que la imagen cubra todo el div */
+  //background-image: url(./../../../../assets/images/login/i2.webp);
+  background-repeat: repeat; /* Evita que la imagen se repita */
+  background-position: center; /* Centra la imagen dentro del div */
+}
+
+.logButtons{
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column; /* O row, dependiendo de cómo quieras organizar los elementos */
+  gap: 1rem;
+}
+
+
+.titleTex h3{
+  font-size: 1.2em;
+}
+.titleTex h4{
+  font-size: 0.8em;
+}
+h2#sendbolTxt{
+  font-size: 1.8em;
+  font-family: 'Typo-hoop';
+}
+
+h2#videoTxt{
+  font-size: 2.5em;
+  font-family: 'Cred';
+}
+
+.title{
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  text-align: center;
+  align-items: center;
+}
+
+a{
+  color: var(--mdc-outlined-button-label-text-color);
+}
+
+.dataFields {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.step-container {
   display: flex;
   flex-direction: column;
+
+}
+
+
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+
+.dialogContentContainer{
+  display: flex;
+  padding: 1%;
+
+}
+.infoPanel{
+  padding: 1%;
+  width: 15vw;
+  display: flex;
+  flex-direction: column; /* O row, dependiendo de cómo quieras organizar los elementos */
+  gap: 1rem;
+}
+
+.likesPanel{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.ratingPanel{
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.purchasePanel{
+  padding: 1%;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column; /* O row, dependiendo de cómo quieras organizar los elementos */
+  gap: 1rem;
+}
+
+.purButtons{
+  display: flex;
+  flex-direction: column; /* O row, dependiendo de cómo quieras organizar los elementos */
+  gap: 1rem;
+}
+.counterButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 12vh;
+}
+
+.photoPanel{
+  display: flex;
+  flex-direction: column; /* O row, dependiendo de cómo quieras organizar los elementos */
+  gap: 1rem;
+  //align-items: center;
+}
+
+.titleTex h1 {
+  font-size: 3em;
+  line-height: 1; /* Ajusta el valor para definir el espacio entre líneas */
+}
+
+.chipsContainer{
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
 }

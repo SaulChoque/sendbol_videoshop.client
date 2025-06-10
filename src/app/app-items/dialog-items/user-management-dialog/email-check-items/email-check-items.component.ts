@@ -116,7 +116,7 @@ export class EmailCheckItemsComponent {
 
 
 
-    //console.log('CAMBIO DE VALORES', value);
+    ////console.log('CAMBIO DE VALORES', value);
     if (value) {
       this.dialogTitle = 'Iniciar sesión';
       this.dialogSubtitle = 'Ingresa tu correo y contraseña para continuar.';
@@ -148,15 +148,15 @@ export class EmailCheckItemsComponent {
     return new Promise((resolve, reject) => {
       this.authService.correoExists(this.emailFormGroup.get('correo')?.value).subscribe({
         next: (response) => {
-          console.log('Respuesta del servidor:', response);
+          //console.log('Respuesta del servidor:', response);
           //this.existsEmail = true;
-          console.log(this.existsEmail);
+          //console.log(this.existsEmail);
           resolve(true); // Resuelve la promesa con el valor true
         },
         error: (err) => {
           console.error('Error al verificar el correo:', err);
           //this.existsEmail = false;
-          console.log(this.existsEmail);
+          //console.log(this.existsEmail);
           resolve(false); // Resuelve la promesa con el valor false
         }
       });
@@ -167,15 +167,15 @@ export class EmailCheckItemsComponent {
     return new Promise((resolve, reject) => {
       this.authService.loginUser(usuario).subscribe({
         next: (response) => {
-          console.log('Respuesta del servidor:', response);
+          //console.log('Respuesta del servidor:', response);
           this.loginStatus = true;
-          console.log(this.loginStatus);
+          //console.log(this.loginStatus);
           resolve(true); // Resuelve la promesa con el valor true
         },
         error: (err) => {
           console.error('Error al verificar el correo:', err);
           this.loginStatus = false;
-          console.log(this.loginStatus);
+          //console.log(this.loginStatus);
           resolve(false); // Resuelve la promesa con el valor false
         }
       });
@@ -195,6 +195,7 @@ export class EmailCheckItemsComponent {
         }
       );
       this.dialog.closeAll();
+      window.location.reload();
     } else{
       this._snackBar.open(
         'Correo o contraseña incorrectos',
@@ -210,7 +211,7 @@ export class EmailCheckItemsComponent {
 
 
   clickNextButton() {
-    console.log('BOTON CORREO APRETADO');
+    //console.log('BOTON CORREO APRETADO');
     if(!this.clickNextButtonValue){
 
       if (!(this.emailFormGroup.get('correo')?.invalid)) {
@@ -283,11 +284,11 @@ export class EmailCheckItemsComponent {
         }
           */
         if (emailControl && emailControl.hasError('required')) {
-          //console.log('siquesi REQUIRED');
+          ////console.log('siquesi REQUIRED');
           this.errorMessageCorreo.set('Tienes que ingresar un valor válido');
         } else if (emailControl && emailControl.hasError('email')) {
           this.errorMessageCorreo.set('No es un correo válido');
-          //console.log('siquesi EMAIL');
+          ////console.log('siquesi EMAIL');
         } else {
           this.errorMessageCorreo.set('');
         }
@@ -295,10 +296,10 @@ export class EmailCheckItemsComponent {
 
       case 'contrasena':
 
-        console.log('CONTRASENA');
+        //console.log('CONTRASENA');
         var passwordControl = this.emailFormGroup.get('contrasena');
         if (passwordControl && passwordControl.hasError('required')) {
-          console.log('siquesi REQUIRED');
+          //console.log('siquesi REQUIRED');
           this.errorMessageContrasena.set('Tienes que ingresar un valor válido');
         } else {
           this.errorMessageContrasena.set('');
@@ -306,16 +307,16 @@ export class EmailCheckItemsComponent {
         break;
 
       case 'nuevaContrasena':
-        console.log('NUEVA CONTRASENA UPDATE');
+        //console.log('NUEVA CONTRASENA UPDATE');
         const newPasswordControl = this.emailFormGroup.get('nuevaContrasena');
         if (newPasswordControl && newPasswordControl.hasError('required')) {
-          console.log('siquesi REQUIRED NUEVA CONTRASENA');
+          //console.log('siquesi REQUIRED NUEVA CONTRASENA');
           this.errorMessageContrasena.set('Tienes que ingresar un valor válido');
         } else if (newPasswordControl && newPasswordControl.hasError('minlength')) {
-          console.log('siquesi MINLENGTH NUEVA CONTRASENA');
+          //console.log('siquesi MINLENGTH NUEVA CONTRASENA');
           this.errorMessageContrasena.set('La contraseña debe tener al menos 8 caracteres');
         } else if (newPasswordControl && newPasswordControl.hasError('pattern')) {
-          console.log('siquesi PATTERN NUEVA CONTRASENA');
+          //console.log('siquesi PATTERN NUEVA CONTRASENA');
           this.errorMessageContrasena.set('La contraseña debe contener al menos un número');
         } else {
           this.errorMessageContrasena.set('');

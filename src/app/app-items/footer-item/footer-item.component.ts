@@ -46,6 +46,6 @@ export class FooterItemComponent {
     this.currentWidth = this.mediaQueryService.returnWidth();
 
 
-    //console.log(this.constantes.IMGBAN001);
+    ////console.log(this.constantes.IMGBAN001);
   }
 }

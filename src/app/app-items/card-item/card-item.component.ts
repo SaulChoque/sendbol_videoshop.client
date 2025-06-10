@@ -57,10 +57,10 @@ export class CardItemComponent {
   ngOnInit() {
     if (this.producto && this.producto.Plataformas) {
       for (let i = 0; i < this.producto.Plataformas.length; i++) {
-        //console.log('AAAAAAAAAAAAAAAAJAJAJA');
+        ////console.log('AAAAAAAAAAAAAAAAJAJAJA');
         const plataforma = this.plataformaService.obtenerPlataformaPorId(this.producto.Plataformas[i]);
-        console.log(plataforma);
-        //console.log(chiptag);
+        //console.log(plataforma);
+        ////console.log(etiqueta);
         if (plataforma && plataforma.icon !== undefined) {
           this.plataformas.push(plataforma.icon);
         }
@@ -76,14 +76,14 @@ export class CardItemComponent {
   //@Input({required: true}) isExpanded?: boolean;
 
   mouseEnter(): void {
-    //console.log(this.producto);
+    ////console.log(this.producto);
     this.isExpanded = true;
-    //console.log('Mouse enter!');
+    ////console.log('Mouse enter!');
   }
 
   mouseLeave(): void {
     this.isExpanded = false;
-    //console.log('Mouse leave!');
+    ////console.log('Mouse leave!');
   }
 
 
@@ -98,7 +98,7 @@ export class CardItemComponent {
 
     });
 
-    //console.log('Open dialog!');
+    ////console.log('Open dialog!');
   }
 
 
